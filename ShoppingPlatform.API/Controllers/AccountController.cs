@@ -6,22 +6,25 @@ using Microsoft.EntityFrameworkCore;
 using ShoppingPlatform.API.Data;
 using ShoppingPlatform.API.Dtos;
 using ShoppingPlatform.API.Entities;
+using ShoppingPlatform.API.Interfaces;
 
 namespace ShoppingPlatform.API.Controllers
 {
     public class AccountController : BaseController
     {
-        private readonly DataContext __context;
-        public AccountController(DataContext _context)
+        private readonly DataContext _context;
+        private readonly ITokenService _tokenService;
+        public AccountController(DataContext context, ITokenService tokenService)
         {
-            __context = _context;
+            _tokenService = tokenService;
+            _context = context;
         }
 
         // Registration a user
         [HttpPost("register")]
         public async Task<ActionResult<User>> Register(UserForRegisterDto userForRegisterDto)
         {
-            if(await UserExists(userForRegisterDto.Username))
+            if (await UserExists(userForRegisterDto.Username))
                 return BadRequest("Username already exists");
 
             using var hmac = new HMACSHA512();
@@ -32,35 +35,39 @@ namespace ShoppingPlatform.API.Controllers
                 PasswordSalt = hmac.Key
             };
 
-            __context.Users.Add(user);
-            await __context.SaveChangesAsync();
-            
+            _context.Users.Add(user);
+            await _context.SaveChangesAsync();
+
             return user;
         }
 
         // Logging in
         [HttpPost("login")]
-        public async Task<ActionResult<User>> Login(UserForLoginDto userForLoginDto)
+        public async Task<ActionResult<UserToReturnDto>> Login(UserForLoginDto userForLoginDto)
         {
-            var user = await __context.Users.SingleOrDefaultAsync(x => x.Username == userForLoginDto.Username);
-            if(user == null)
+            var user = await _context.Users.SingleOrDefaultAsync(x => x.Username == userForLoginDto.Username);
+            if (user == null)
                 return Unauthorized("Invalid username");
-            
+
             using var hmac = new HMACSHA512(user.PasswordSalt);
 
             var computedHash = hmac.ComputeHash(Encoding.UTF8.GetBytes(userForLoginDto.Password));
 
-            for(int i = 0; i < computedHash.Length; i++)
-                if(computedHash[i] != user.PasswordHash[i])
+            for (int i = 0; i < computedHash.Length; i++)
+                if (computedHash[i] != user.PasswordHash[i])
                     return Unauthorized("Invalid password");
-            
-            return user;
-        }
+
+            return new UserToReturnDto
+            {
+                Username = user.Username,
+                Token = _tokenService.CreateToken(user)
+            };
+         }
 
         // Helper methods
         private async Task<bool> UserExists(string username)
         {
-            return await __context.Users.AnyAsync(u => u.Username == username.ToLower());
+            return await _context.Users.AnyAsync(u => u.Username == username.ToLower());
         }
     }
 }

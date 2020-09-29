@@ -12,6 +12,8 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.EntityFrameworkCore;
 using ShoppingPlatform.API.Data;
+using ShoppingPlatform.API.Interfaces;
+using ShoppingPlatform.API.Services;
 
 namespace ShoppingPlatform.API
 {
@@ -27,6 +29,7 @@ namespace ShoppingPlatform.API
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddScoped<ITokenService, TokenService>();
             services.AddDbContext<DataContext>(options =>
             {
                 options.UseSqlServer(_config.GetConnectionString("DefaultConnection"));
