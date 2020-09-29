@@ -14,6 +14,9 @@ using Microsoft.EntityFrameworkCore;
 using ShoppingPlatform.API.Data;
 using ShoppingPlatform.API.Interfaces;
 using ShoppingPlatform.API.Services;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.IdentityModel.Tokens;
+using System.Text;
 
 namespace ShoppingPlatform.API
 {
@@ -36,6 +39,19 @@ namespace ShoppingPlatform.API
             });
             services.AddControllers();
             services.AddCors();
+            services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+                .AddJwtBearer(options => 
+                {
+                    options.TokenValidationParameters = new TokenValidationParameters
+                    {
+                        ValidateIssuerSigningKey = true,
+                        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_config["TokenKey"])), 
+                        // Issuer - API server
+                        ValidateIssuer = false,
+                        // Audience - Angular app
+                        ValidateAudience = false
+                    };
+                });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -52,6 +68,8 @@ namespace ShoppingPlatform.API
 
             app.UseCors(policy => policy.AllowAnyHeader().AllowAnyMethod().WithOrigins("http://localhost:4200"));
 
+            app.UseAuthentication();
+            
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
