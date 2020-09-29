@@ -23,7 +23,7 @@ namespace ShoppingPlatform.API.Controllers
         {
             if(await UserExists(userForRegisterDto.Username))
                 return BadRequest("Username already exists");
-                
+
             using var hmac = new HMACSHA512();
             var user = new User
             {
@@ -38,6 +38,26 @@ namespace ShoppingPlatform.API.Controllers
             return user;
         }
 
+        // Logging in
+        [HttpPost("login")]
+        public async Task<ActionResult<User>> Login(UserForLoginDto userForLoginDto)
+        {
+            var user = await __context.Users.SingleOrDefaultAsync(x => x.Username == userForLoginDto.Username);
+            if(user == null)
+                return Unauthorized("Invalid username");
+            
+            using var hmac = new HMACSHA512(user.PasswordSalt);
+
+            var computedHash = hmac.ComputeHash(Encoding.UTF8.GetBytes(userForLoginDto.Password));
+
+            for(int i = 0; i < computedHash.Length; i++)
+                if(computedHash[i] != user.PasswordHash[i])
+                    return Unauthorized("Invalid password");
+            
+            return user;
+        }
+
+        // Helper methods
         private async Task<bool> UserExists(string username)
         {
             return await __context.Users.AnyAsync(u => u.Username == username.ToLower());
