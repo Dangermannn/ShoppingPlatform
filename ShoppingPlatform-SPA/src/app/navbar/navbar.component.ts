@@ -9,6 +9,7 @@ import { AlertifyService } from '../_services/alertify.service';
 })
 export class NavbarComponent implements OnInit {
   loginModel: any = {}
+  loggedIn = false;
   navbarOpened = false;
   constructor(private accountService: AccountService, private alertify: AlertifyService) { }
 
@@ -22,8 +23,13 @@ export class NavbarComponent implements OnInit {
   login(){
     this.accountService.login(this.loginModel).subscribe(response => {
       this.alertify.success("Successfully logged in!");
+      this.loggedIn = true;
     }, error => {
       this.alertify.error("Given login or password are incorrect!");
     });
+  }
+
+  logout(){
+    this.loggedIn = false;
   }
 }

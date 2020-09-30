@@ -23,13 +23,23 @@
                 </a>
                 
                 <div class="dropdown-menu dropdown-menu-right mt-3" *dropdownMenu>
-                    <form #loginForm="ngForm" class="mt-2" (ngSubmit)="login()" autocomplete="off">
+                    <form *ngIf="!loggedIn" #loginForm="ngForm" class="mt-2" (ngSubmit)="login()" autocomplete="off">
                         <input name="username" [(ngModel)]="loginModel.username" class="dropdown-item form-control" type="text" placeholder="Username">
                         <input name="password" [(ngModel)]="loginModel.password" class="dropdown-item form-control mt-3" type="password" placeholder="Password">
                         <button class="btn btn-primary dropdown-item mt-3 mx-auto"><i class="fa fa-sign-in mr-2"></i>Log in</button>
                         <div class="dropdown-divider mt-3"></div>
                         <a class="dropdown-item" href="#">Create a new account</a>
                     </form>
+
+                    <form *ngIf="loggedIn">
+                        <button class="btn btn-primary dropdown-item mt-3 mx-auto"><i class="fa fa-shopping-bag mr-2"></i>My orders</button>
+                        <button class="btn btn-primary dropdown-item mt-3 mx-auto"><i class="fa fa-cog mr-2"></i>Account settings</button>
+                        <button class="btn btn-primary dropdown-item mt-3 mx-auto" (click)="logout()">
+                            <i class="fa fa-sign-out mr-2"></i>
+                            Log out
+                        </button>
+                    </form>
+
 
                 </div>
             </div>
