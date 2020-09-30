@@ -15,7 +15,7 @@ export class AppComponent implements OnInit {
 
   ngOnInit(): void {
     console.log("URL: " + this.baseUrl);
-    this.getUsers();
+    //this.getUsers();
   }
 
   getUsers(){
