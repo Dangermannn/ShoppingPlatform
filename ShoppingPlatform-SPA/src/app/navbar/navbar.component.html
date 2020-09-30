@@ -1,0 +1,36 @@
+
+<nav class="navbar navbar-expand-xl navbar-dark bg-dark">
+    <div class="container">
+        <a class="navbar-brand" href="#">Shopping Platform</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExample06" aria-controls="navbarsExample06" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse">
+            
+            <form class="navbar-center form-inline my-2 my-md-1">
+                <input class="search-key form-control" type="text" placeholder="Search item">
+                <select class="category form-control form-control-md ml-2">
+                    <option value="All" selected>All</option>
+                    <option value="Cars">Cars</option>
+                    <option value="Mobile">Mobile</option>
+                </select>
+                <button type="button" class="btn btn-primary ml-2">Search</button>
+            </form>
+            
+            <div class="dropdown" dropdown [autoClose]="false">
+                <a class="dropdown-toggle text-light" dropdownToggle>
+                    Welcome
+                </a>
+                
+                <div class="dropdown-menu dropdown-menu-right mt-3" *dropdownMenu>
+                    <input class="dropdown-item form-control" type="text" placeholder="Username">
+                    <input class="dropdown-item form-control mt-3" type="text" placeholder="Password">
+                    <button class="btn btn-primary dropdown-item mt-3"><i class="fa fa-sign-in mr-2"></i>Log in</button>
+                    <div class="dropdown-divider mt-3"></div>
+                    <a class="dropdown-item" href="#">Create a new account</a>
+                </div>
+            </div>
+ 
+        </div>
+    </div>
+</nav>

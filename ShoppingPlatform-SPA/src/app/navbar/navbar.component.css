@@ -1,0 +1,22 @@
+.dropdown-toggle,
+.dropdown-item {
+  cursor: pointer;
+}
+
+
+.search-key
+{
+    min-width: 400px;    
+}
+.navbar-center
+{
+    display:flex;
+    justify-content:center;
+    width: 100%;
+}
+
+.dropdown-menu{
+    right: 0;
+    left: auto;
+    width: 300px !important;
+}
