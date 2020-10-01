@@ -10,7 +10,9 @@ using ShoppingPlatform.API.Interfaces;
 
 namespace ShoppingPlatform.API.Controllers
 {
-    public class AccountController : BaseController
+    [ApiController]
+    [Route("api/[controller]")]
+    public class AccountController : ControllerBase
     {
         private readonly DataContext _context;
         private readonly ITokenService _tokenService;

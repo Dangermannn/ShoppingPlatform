@@ -4,30 +4,41 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using ShoppingPlatform.API.Data;
+using ShoppingPlatform.API.Interfaces;
 using ShoppingPlatform.API.Entities;
-
 namespace ShoppingPlatform.API.Controllers
 {
-    public class UsersController : BaseController
+    [ApiController]
+    [Route("api/[controller]")]
+    public class UsersController : ControllerBase
     {
-        private readonly DataContext _context;
-        public UsersController(DataContext context)
+        private readonly IUserRepository _userRepository;
+        public UsersController(IUserRepository userRepository)
         {
-            _context = context;
+            _userRepository = userRepository;
         }
 
         [Authorize]
         [HttpGet]
         public async Task<ActionResult<IEnumerable<User>>> GetUsers()
         {
-            return await _context.Users.ToListAsync();
+            return Ok(await _userRepository.GetUsersAsync());
         }
 
         [Authorize]
         [HttpGet("{id}")]
         public async Task<ActionResult<User>> GetUser(int id)
         {
-            return await _context.Users.FindAsync(id);
+            return await _userRepository.GetUserByIdAsync(id);
         }
+
+/*
+        [Authorize]
+        [HttpGet("{username}")]
+        public async Task<ActionResult<User>> GetUser(string username)
+        {
+            return await _userRepository.GetUserByUsernameAsync(username);
+        }
+*/
     }
 }

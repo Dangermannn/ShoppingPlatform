@@ -3,28 +3,41 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using ShoppingPlatform.API.Data;
+using ShoppingPlatform.API.Interfaces;
 using ShoppingPlatform.API.Entities;
+using AutoMapper;
+using ShoppingPlatform.API.Dtos;
 
 namespace ShoppingPlatform.API.Controllers
 {
-    public class ProductsController : BaseController
+    [ApiController]
+    [Route("api/[controller]")]
+    public class ProductsController : ControllerBase
     {
-        private readonly DataContext _context;
-        public ProductsController(DataContext context)
+        private readonly IProductsRepository _productsRepository;
+        private readonly IMapper _mapper;
+        public ProductsController(IProductsRepository productsRepository, IMapper mapper)
         {
-            _context = context;
+            _mapper = mapper;
+            _productsRepository = productsRepository;
         }
 
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Product>>> GetProducts()
+        public async Task<ActionResult<IEnumerable<ProductToReturnDto>>> GetProducts()
         {
-            return await _context.Products.ToListAsync();
+            var products = await _productsRepository.GetProductsAsync();
+
+            var productsToReturn = _mapper.Map<IEnumerable<ProductToReturnDto>>(products);
+            return Ok(productsToReturn);
         }
 
         [HttpGet("{id}")]
-        public async Task<ActionResult<Product>> GetProduct(int id)
+        public async Task<ActionResult<ProductToReturnDto>> GetProduct(int id)
         {
-            return await _context.Products.FindAsync(id);
+            var product = await _productsRepository.GetProductByIdAsync(id);
+
+            var productToReturn = _mapper.Map<ProductToReturnDto>(product);
+            return productToReturn;
         }
     }
 }
