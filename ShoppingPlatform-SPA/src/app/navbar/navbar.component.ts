@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Observable } from 'rxjs';
+import { User } from '../_models/user';
 import { AccountService } from '../_services/account.service';
 import { AlertifyService } from '../_services/alertify.service';
 
@@ -9,9 +11,9 @@ import { AlertifyService } from '../_services/alertify.service';
 })
 export class NavbarComponent implements OnInit {
   loginModel: any = {}
-  loggedIn = false;
   navbarOpened = false;
-  constructor(private accountService: AccountService, private alertify: AlertifyService) { }
+
+  constructor(public accountService: AccountService, private alertify: AlertifyService) { }
 
   ngOnInit(): void {
   }
@@ -23,13 +25,12 @@ export class NavbarComponent implements OnInit {
   login(){
     this.accountService.login(this.loginModel).subscribe(response => {
       this.alertify.success("Successfully logged in!");
-      this.loggedIn = true;
     }, error => {
       this.alertify.error("Given login or password are incorrect!");
     });
   }
 
   logout(){
-    this.loggedIn = false;
+    this.accountService.logout();
   }
 }
