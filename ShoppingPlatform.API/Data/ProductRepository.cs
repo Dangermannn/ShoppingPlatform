@@ -32,5 +32,10 @@ namespace ShoppingPlatform.API.Data
         {
             _context.Entry(product).State = EntityState.Modified;
         }
+
+        public async Task<IEnumerable<Category>> GetCategories()
+        {
+            return await _context.Categories.ToListAsync();
+        }
     }
 }

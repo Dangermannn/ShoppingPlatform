@@ -22,13 +22,6 @@ export class ProductListComponent implements OnInit {
   loadMembers(){
     this.productService.getProducts().subscribe(products => {
       this.products = products;
-    });
-
-    this.productService.getProducts().subscribe(products => {
-      this.products = products;
-      console.log("LOADED PRODuCTS");
-      console.log("LOADED: " + this.products);
-      console.log("ON PIPE: " + products);
     }, error => {
       this.alertify.error("Failed to load products");
     });

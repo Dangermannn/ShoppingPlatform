@@ -39,5 +39,11 @@ namespace ShoppingPlatform.API.Controllers
             var productToReturn = _mapper.Map<ProductToReturnDto>(product);
             return productToReturn;
         }
+
+        [HttpGet("categories")]
+        public async Task<ActionResult<IEnumerable<Category>>> GetCategories()
+        {
+            return Ok(await _productsRepository.GetCategories());
+        }
     }
 }
