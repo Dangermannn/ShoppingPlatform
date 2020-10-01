@@ -9,12 +9,14 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NavbarComponent } from './navbar/navbar.component';
 import { FormsModule } from '@angular/forms';
 import { ProductListComponent } from './mainPage/product-list/product-list.component';
+import { ProductCardComponent } from './mainPage/product-card/product-card.component';
 
 @NgModule({   
   declarations: [
     AppComponent,
     NavbarComponent,
-    ProductListComponent
+    ProductListComponent,
+    ProductCardComponent
   ],
   imports: [
     BrowserModule,  
