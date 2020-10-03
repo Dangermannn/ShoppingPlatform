@@ -7,11 +7,12 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NavbarComponent } from './navbar/navbar.component';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { TreeView, TreeViewModule } from '@syncfusion/ej2-angular-navigations'
 import { ProductListComponent } from './mainPage/product-list/product-list.component';
 import { ProductCardComponent } from './mainPage/product-card/product-card.component';
 import { CategoriesComponent } from './mainPage/categories/categories.component';
+import { RegistrationComponent } from './registration/registration.component';
 
 @NgModule({   
   declarations: [
@@ -19,7 +20,8 @@ import { CategoriesComponent } from './mainPage/categories/categories.component'
     NavbarComponent,
     ProductListComponent,
     ProductCardComponent,
-    CategoriesComponent
+    CategoriesComponent,
+    RegistrationComponent
   ],
   imports: [
     BrowserModule,  
@@ -29,7 +31,8 @@ import { CategoriesComponent } from './mainPage/categories/categories.component'
     CollapseModule.forRoot(),
     FormsModule,
     TreeViewModule,
-    BsDropdownModule.forRoot()
+    BsDropdownModule.forRoot(),
+    ReactiveFormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

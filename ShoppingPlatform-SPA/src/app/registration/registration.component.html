@@ -1,0 +1,60 @@
+<form [formGroup]="registrationForm" (ngSubmit)="registerUser()" autocomplete="off">
+    <h2>Create an account and add trade with us!</h2>
+    <hr>
+
+    <div class="form-group">
+        <input type="text" 
+               class="form-control" 
+               formControlName="username" 
+               placeholder="Username"
+               [ngClass]="{'is-invalid' : registrationForm.get('username').errors && registrationForm.get('username').touched}">
+        <div class="invalid-feedback">Plead fill in a field with username</div>
+    </div>
+
+    <div class="form-group">
+        <input type="password"
+               class="form-control" 
+               formControlName="password" 
+               placeholder="Password"
+               [ngClass]="{'is-invalid' : registrationForm.get('password').errors && registrationForm.get('password').touched}">
+        <div class="invalid-feedback"
+             *ngIf="registrationForm.get('password').hasError('required') && registrationForm.get('password').touched">
+             Password is required
+        </div>
+        <div class="invalid-feedback"
+             *ngIf="registrationForm.get('password').hasError('minlength') && registrationForm.get('password').touched">
+             Password must be at least 8 characters
+        </div>
+        <div class="invalid-feedback"
+             *ngIf="registrationForm.get('password').hasError('maxlength') && registrationForm.get('password').touched">
+             Password cannot exceed 24 characters
+        </div>
+    </div>
+
+    <div class="form-group">
+        <input type="password" 
+               class="form-control" 
+               formControlName="confirmPassword" 
+               placeholder="Password"
+               [ngClass]="{'is-invalid': (registrationForm.get('confirmPassword').errors && registrationForm.get('confirmPassword').touched) ||
+                  (registrationForm.get('confirmPassword').touched && registrationForm.hasError('mismatch'))}">
+        <div class="invalid-feedback"
+             *ngIf="registrationForm.get('confirmPassword').hasError('required') && registrationForm.get('confirmPassword').touched">
+             Confirm password field is required
+        </div>
+        <div class="invalid-feedback"
+             *ngIf="registrationForm.hasError('mismatch') && registrationForm.get('confirmPassword').touched">
+             Passwords are not the same
+        </div>
+    </div>
+
+    <div class="form-group">
+        <button class="btn btn-primary" [disabled]="!registrationForm.valid" type="submit">Create an account!</button>
+    </div>
+</form>
+
+
+<p>Form value: {{ registrationForm.value | json }}</p> 
+<p>Form value: {{ registrationForm.status | json }}</p>
+
+<p>IS VALID: {{ registrationForm.valid }}</p>
