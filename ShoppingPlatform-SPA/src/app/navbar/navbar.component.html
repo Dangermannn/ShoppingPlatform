@@ -28,7 +28,7 @@
                         <input name="password" [(ngModel)]="loginModel.password" class="dropdown-item form-control mt-3" type="password" placeholder="Password">
                         <button class="btn btn-primary dropdown-item mt-3 mx-auto"><i class="fa fa-sign-in mr-2"></i>Log in</button>
                         <div class="dropdown-divider mt-3"></div>
-                        <a class="dropdown-item" href="#">Create a new account</a>
+                        <a class="dropdown-item" routerLink='/register'>Create a new account</a>
                     </form>
 
                     <form *ngIf="accountService.currentUser$ | async">

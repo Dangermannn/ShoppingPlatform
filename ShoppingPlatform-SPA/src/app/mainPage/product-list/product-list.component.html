@@ -1,6 +1,6 @@
 <div class="row px-5">
 
-    <div *ngFor="let product of (products ? products.slice(0, 2) : [])" class="card-list p-2"> 
+    <div *ngFor="let product of (products ? products.slice(0, 5) : [])" class="card-list p-2"> 
         <app-product-card [product]="product"></app-product-card>
     </div>
 
