@@ -1,10 +1,10 @@
-namespace ShoppingPlatform.API.Entities
+namespace ShoppingPlatform.API.Dtos
 {
-    public class Category
+    public class CategoryToReturnDto
     {
         public int Id { get; set; }
         public string Name { get; set; }
         public bool HasChild { get; set; }
-        public Category ParentCategory { get; set; }
+        public int? ParentCategoryId { get; set; }
     }
 }

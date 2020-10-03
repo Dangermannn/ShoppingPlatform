@@ -1,7 +1,44 @@
-<h1>Categories</h1>
 <div class="">
-    <div *ngFor="let category of categories">
-        <button class="btn btn-light my-2 w-100">{{ category.name | titlecase }}</button>
+    <h1>Categories</h1>
+    <div class="dropdown-divider mt-3"></div>
+    <div class="my-2" *ngFor="let category of categories">
+        <!-- 
+
+            <button *ngIf="category.parentCategory == null" class="btn btn-light my-2 w-100">{{ category.name | titlecase }}</button>
+        -->
+        <button *ngIf="category.parentCategory == null" type="button" class="btn btn-light w-100" (click)="category.collapsed = !category.collapsed">{{ category.name | titlecase }}
+        </button>
+        <div id="collapse" [ngClass]="{darkWhite: category.collapsed}" [collapse]="!category.collapsed" [isAnimated]="true">
+            <div class="well well-lg card card-block card-header">Some content</div>
+        </div>
         <br>
     </div>
 </div>
+
+<div>
+    <li>
+        <ul *ngFor="let category of categories">
+            <button *ngIf="category.parentCategory == null" type="button" class="btn btn-light w-100" (click)="category.collapsed = !category.collapsed"> {{ category.name | titlecase}}</button>
+            <div id="collapse" [ngClass]="{darkWhite: category.collapsed}" [collapse]="!category.collapsed" [isAnimated]="true">
+                <ul>
+                    <li *ngFor="let category of categories"></li>
+                </ul>
+            </div>
+        </ul>
+    </li>
+</div>
+
+  <ul class="menu_inline">
+    <li class="menu">
+        <div *ngFor="let category of categories">
+        <a>{{ category.name }}</a>
+        <ul>
+            <li><div *ngFor="let subcategory of categories">
+            <ng-container *ngIf="subcategory.parentCategory === category.id">
+            <a>{{subcategory.name}}</a>
+            </ng-container></div>
+            </li>
+        </ul>
+        </div>
+    </li>
+</ul>

@@ -1,5 +1,6 @@
 export interface Category{
     id: number;
     name: string;
-    parentCategory: Category;
+    parentCategoryId: number;
+    hasChild?: boolean;
 }
