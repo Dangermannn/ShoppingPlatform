@@ -1,3 +1,5 @@
+using System;
+
 namespace ShoppingPlatform.API.Entities
 {
     public class User
@@ -6,5 +8,9 @@ namespace ShoppingPlatform.API.Entities
         public string Username { get; set; }
         public byte[] PasswordHash { get; set; }
         public byte[] PasswordSalt { get; set; }
+        public string Gender { get; set; }
+        public DateTime Created { get; set; }
+        public string Description { get; set; }
+        public string City { get; set; }
     }
 }

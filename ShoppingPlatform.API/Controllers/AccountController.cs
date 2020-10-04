@@ -45,7 +45,7 @@ namespace ShoppingPlatform.API.Controllers
 
         // Logging in
         [HttpPost("login")]
-        public async Task<ActionResult<UserToReturnDto>> Login(UserForLoginDto userForLoginDto)
+        public async Task<ActionResult<UserToReturnAfterLoginDto>> Login(UserForLoginDto userForLoginDto)
         {
             var user = await _context.Users.SingleOrDefaultAsync(x => x.Username == userForLoginDto.Username);
             if (user == null)
@@ -59,7 +59,7 @@ namespace ShoppingPlatform.API.Controllers
                 if (computedHash[i] != user.PasswordHash[i])
                     return Unauthorized("Invalid password");
 
-            return new UserToReturnDto
+            return new UserToReturnAfterLoginDto
             {
                 Username = user.Username,
                 Token = _tokenService.CreateToken(user)
