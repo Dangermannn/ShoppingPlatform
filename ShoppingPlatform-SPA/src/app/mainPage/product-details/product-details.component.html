@@ -22,6 +22,10 @@
                     <strong>Annoucement added</strong>
                     <p>{{ product.addedDate | date: 'short' }}</p>
                 </div>
+                <div>
+                    <strong>Price</strong>
+                    <h2>${{ product.price}}</h2>
+                </div>
             </div>
         </div>
     </div>
@@ -35,7 +39,24 @@
                 <tab heading="More about seller">
                     <strong>Seller:</strong>
                     <br>
-                    <p>{{ product.sellerName }}</p>
+                    <p>{{ product.sellerName | titlecase }}</p>
+
+                    <strong>Gender:</strong>
+                    <br>
+                    <p>{{ seller.gender | titlecase }}</p>
+
+                    <strong>City:</strong>
+                    <br>
+                    <p>{{ seller.city | titlecase }}</p>
+
+                    <strong>Address:</strong>
+                    <br>
+                    <p>{{ seller.fullAddress | titlecase }}</p>
+
+                    <strong>Description:</strong>
+                    <br>
+                    <p>{{ seller?.description | titlecase }}</p>
+
                 </tab>
             </tabset>
         </div>

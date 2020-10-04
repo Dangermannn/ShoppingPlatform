@@ -22,7 +22,7 @@ export class UserService {
     return this.http.get<User[]>(this.baseUrl + 'users', httpOptions);
   }
 
-  getMember(id: number){
-    return this.http.get<User>(this.baseUrl + 'users/' + id, httpOptions);
+  getMember(name: string){
+    return this.http.get<User>(this.baseUrl + 'users/' + name, httpOptions);
   }
 }

@@ -1,9 +1,12 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { SelectMultipleControlValueAccessor } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { Product } from 'src/app/_models/product';
+import { User } from 'src/app/_models/user';
 import { AccountService } from 'src/app/_services/account.service';
 import { AlertifyService } from 'src/app/_services/alertify.service';
 import { ProductService } from 'src/app/_services/product.service';
+import { UserService } from 'src/app/_services/user.service';
 
 @Component({
   selector: 'app-product-details',
@@ -12,18 +15,31 @@ import { ProductService } from 'src/app/_services/product.service';
 })
 export class ProductDetailsComponent implements OnInit {
   product: Product;
+  seller: User;
 
-  constructor(private productService: ProductService, private alertify: AlertifyService, private route: ActivatedRoute) { }
+  constructor(private userService: UserService, private productService: ProductService, private alertify: AlertifyService, private route: ActivatedRoute) { }
 
   ngOnInit(): void {
     this.loadProduct(this.route.snapshot.params['id']);
+    console.log("BEFORE");
+    //this.getSeller(this.product.sellerName);
+    console.log("AFTER");
   }
 
   loadProduct(id: number){
     this.productService.getProduct(id).subscribe(result => {
       this.product = result;
+      this.getSeller(result.sellerName);
     }, error => {
       this.alertify.error("Cannot load a product");
+    });
+  }
+
+  getSeller(name: string){
+    this.userService.getMember(name).subscribe(result => {
+      this.seller = result;
+    }, error => {
+      this.alertify.error("Error while getting information about seller");
     });
   }
 }
