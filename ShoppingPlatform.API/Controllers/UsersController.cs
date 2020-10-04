@@ -6,6 +6,9 @@ using Microsoft.EntityFrameworkCore;
 using ShoppingPlatform.API.Data;
 using ShoppingPlatform.API.Interfaces;
 using ShoppingPlatform.API.Entities;
+using AutoMapper;
+using ShoppingPlatform.API.Dtos;
+
 namespace ShoppingPlatform.API.Controllers
 {
     [ApiController]
@@ -13,8 +16,10 @@ namespace ShoppingPlatform.API.Controllers
     public class UsersController : ControllerBase
     {
         private readonly IUserRepository _userRepository;
-        public UsersController(IUserRepository userRepository)
+        private readonly IMapper _mapper;
+        public UsersController(IUserRepository userRepository, IMapper mapper)
         {
+            _mapper = mapper;
             _userRepository = userRepository;
         }
 
@@ -22,7 +27,9 @@ namespace ShoppingPlatform.API.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<User>>> GetUsers()
         {
-            return Ok(await _userRepository.GetUsersAsync());
+            var users = await _userRepository.GetUsersAsync();
+            var usersToReturn = _mapper.Map<IEnumerable<UserToReturnDto>>(users);
+            return Ok(usersToReturn);
         }
 
         /*
@@ -39,7 +46,10 @@ namespace ShoppingPlatform.API.Controllers
         [HttpGet("{username}")]
         public async Task<ActionResult<User>> GetUser(string username)
         {
-            return await _userRepository.GetUserByUsernameAsync(username);
+            var user = await _userRepository.GetUserByUsernameAsync(username);
+            var userToReturn = _mapper.Map<UserToReturnDto>(user);
+
+            return Ok(userToReturn);
         }
 
     }

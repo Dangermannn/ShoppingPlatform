@@ -5,7 +5,6 @@ namespace ShoppingPlatform.API.Dtos
     public class UserToReturnDto
     {
         public string Username { get; set; }
-        public string Token { get; set; }
         public string Gender { get; set; }
         public DateTime Created { get; set; }
         public string Description { get; set; }

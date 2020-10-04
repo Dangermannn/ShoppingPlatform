@@ -12,5 +12,6 @@ namespace ShoppingPlatform.API.Entities
         public DateTime Created { get; set; }
         public string Description { get; set; }
         public string City { get; set; }
+        public string FullAddress { get; set; }
     }
 }
