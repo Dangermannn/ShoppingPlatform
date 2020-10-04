@@ -1,3 +1,4 @@
+using System;
 using System.ComponentModel.DataAnnotations;
 
 namespace ShoppingPlatform.API.Dtos
@@ -8,5 +9,12 @@ namespace ShoppingPlatform.API.Dtos
         public string Username { get; set; }
         [Required]
         public string Password { get; set; }
+        [Required]
+        public string Gender { get; set; }
+        public DateTime Created { get; set; }
+        [Required]
+        public string Description { get; set; }
+        [Required]
+        public string City { get; set; }
     }
 }

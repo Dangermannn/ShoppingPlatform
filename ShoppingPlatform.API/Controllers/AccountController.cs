@@ -1,3 +1,4 @@
+using System;
 using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
@@ -34,13 +35,22 @@ namespace ShoppingPlatform.API.Controllers
             {
                 Username = userForRegisterDto.Username,
                 PasswordHash = hmac.ComputeHash(Encoding.UTF8.GetBytes(userForRegisterDto.Password)),
-                PasswordSalt = hmac.Key
+                PasswordSalt = hmac.Key,
+                Gender = userForRegisterDto.Gender,
+                Created = DateTime.Now,
+                Description = userForRegisterDto.Description,
+                City = userForRegisterDto.City,
+                FullAddress = userForRegisterDto.City
             };
 
             _context.Users.Add(user);
             await _context.SaveChangesAsync();
 
-            return user;
+            return Ok(new UserToReturnAfterLoginDto
+            {
+                Username = user.Username,
+                Token = _tokenService.CreateToken(user)
+            });
         }
 
         // Logging in
