@@ -46,11 +46,7 @@ namespace ShoppingPlatform.API.Controllers
             _context.Users.Add(user);
             await _context.SaveChangesAsync();
 
-            return Ok(new UserToReturnAfterLoginDto
-            {
-                Username = user.Username,
-                Token = _tokenService.CreateToken(user)
-            });
+            return user;
         }
 
         // Logging in
