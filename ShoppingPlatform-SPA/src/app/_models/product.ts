@@ -6,7 +6,8 @@ export interface Product{
     id: number;
     title: string;
     description: string;
-    category: Category;
+    categoryName: string;
     price: number;
-    seller: User;
+    sellerName: string;
+    addedDate: Date;
 }

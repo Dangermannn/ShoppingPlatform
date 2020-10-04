@@ -1,3 +1,5 @@
+using System;
+
 namespace ShoppingPlatform.API.Dtos
 {
     public class ProductToReturnDto
@@ -8,5 +10,11 @@ namespace ShoppingPlatform.API.Dtos
         public string CategoryName { get; set; }
         public decimal Price { get; set; }
         public string SellerName { get; set; }
+        public DateTime AddedDate { get; set; }
+
+        public ProductToReturnDto()
+        {
+            AddedDate = DateTime.Now;
+        }
     }
 }

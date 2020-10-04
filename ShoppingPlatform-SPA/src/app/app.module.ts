@@ -1,11 +1,12 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http'
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { BsDropdownModule} from 'ngx-bootstrap/dropdown';
 import { CollapseModule } from 'ngx-bootstrap/collapse';
+import { TabsModule } from 'ngx-bootstrap/tabs';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NavbarComponent } from './navbar/navbar.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { TreeView, TreeViewModule } from '@syncfusion/ej2-angular-navigations'
@@ -14,6 +15,7 @@ import { ProductCardComponent } from './mainPage/product-card/product-card.compo
 import { CategoriesComponent } from './mainPage/categories/categories.component';
 import { RegistrationComponent } from './registration/registration.component';
 import { HomePageComponent } from './mainPage/home-page/home-page.component';
+import { ProductDetailsComponent } from './mainPage/product-details/product-details.component';
 
 @NgModule({   
   declarations: [
@@ -23,7 +25,8 @@ import { HomePageComponent } from './mainPage/home-page/home-page.component';
     ProductCardComponent,
     CategoriesComponent,
     RegistrationComponent,
-    HomePageComponent
+    HomePageComponent,
+    ProductDetailsComponent
   ],
   imports: [
     BrowserModule,  
@@ -33,6 +36,7 @@ import { HomePageComponent } from './mainPage/home-page/home-page.component';
     CollapseModule.forRoot(),
     FormsModule,
     TreeViewModule,
+    TabsModule.forRoot(),
     BsDropdownModule.forRoot(),
     ReactiveFormsModule
   ],

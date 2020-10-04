@@ -25,20 +25,22 @@ namespace ShoppingPlatform.API.Controllers
             return Ok(await _userRepository.GetUsersAsync());
         }
 
+        /*
         [Authorize]
         [HttpGet("{id}")]
         public async Task<ActionResult<User>> GetUser(int id)
         {
             return await _userRepository.GetUserByIdAsync(id);
         }
+        */
 
-/*
+
         [Authorize]
         [HttpGet("{username}")]
         public async Task<ActionResult<User>> GetUser(string username)
         {
             return await _userRepository.GetUserByUsernameAsync(username);
         }
-*/
+
     }
 }
