@@ -13,3 +13,40 @@ body {
     margin: 0;
     font-family: Roboto, "Helvetica Neue", sans-serif;
 }
+
+
+.tab-panel{
+    border: 1px solid #ddd;
+    border-radius: 3px;
+    margin: 25px;
+    padding: 20px;
+    min-width: 100%;
+    min-height: 200px;
+}
+
+.nav-tabs > li.open,
+.member-tabset > .nav-tabs > li:hover {
+    border-bottom: 4px solid #46af46;
+}
+
+.nav-tabs > li.open,
+.member-tabset > .nav-tabs > li {
+     border-bottom: 4px solid #8ef78e;
+}
+
+.member-tabset > .nav-tabs > li.active{
+    border-bottom: 4px solid #005e00;
+}
+
+.member-tabset > .nav-tabs > li.open > a,
+.member-tabset > .nav-tabs > li:hover > a {
+    background: none !important;
+    font-weight: bold;
+}
+
+.member-tabset > .tab-content {
+    background-color: #fff;
+    border: 0;
+    border-top: 1px solid #eee;
+    padding: 20px 0;
+  }
