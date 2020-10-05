@@ -16,6 +16,7 @@ import { CategoriesComponent } from './mainPage/categories/categories.component'
 import { RegistrationComponent } from './registration/registration.component';
 import { HomePageComponent } from './mainPage/home-page/home-page.component';
 import { ProductDetailsComponent } from './mainPage/product-details/product-details.component';
+import { ProductDetailsResolver } from './_resolvers/product-details.resolver';
 
 @NgModule({   
   declarations: [
@@ -40,7 +41,7 @@ import { ProductDetailsComponent } from './mainPage/product-details/product-deta
     BsDropdownModule.forRoot(),
     ReactiveFormsModule
   ],
-  providers: [],
+  providers: [ProductDetailsResolver],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

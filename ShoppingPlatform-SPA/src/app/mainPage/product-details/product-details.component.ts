@@ -20,7 +20,9 @@ export class ProductDetailsComponent implements OnInit {
   constructor(private userService: UserService, private productService: ProductService, private alertify: AlertifyService, private route: ActivatedRoute) { }
 
   ngOnInit(): void {
-    this.loadProduct(this.route.snapshot.params['id']);
+    this.route.data.subscribe(data => {
+      this.product = data['product'];
+    });
     console.log("BEFORE");
     //this.getSeller(this.product.sellerName);
     console.log("AFTER");
