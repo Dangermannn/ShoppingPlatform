@@ -28,20 +28,5 @@ export class ProductDetailsComponent implements OnInit {
     console.log("AFTER");
   }
 
-  loadProduct(id: number){
-    this.productService.getProduct(id).subscribe(result => {
-      this.product = result;
-      this.getSeller(result.sellerName);
-    }, error => {
-      this.alertify.error("Cannot load a product");
-    });
-  }
 
-  getSeller(name: string){
-    this.userService.getMember(name).subscribe(result => {
-      this.seller = result;
-    }, error => {
-      this.alertify.error("Error while getting information about seller");
-    });
-  }
 }

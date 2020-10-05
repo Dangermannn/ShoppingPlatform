@@ -1,4 +1,5 @@
 using System;
+using ShoppingPlatform.API.Entities;
 
 namespace ShoppingPlatform.API.Dtos
 {
@@ -9,7 +10,7 @@ namespace ShoppingPlatform.API.Dtos
         public string Description { get; set; }
         public string CategoryName { get; set; }
         public decimal Price { get; set; }
-        public string SellerName { get; set; }
+        public UserToReturnDto Seller { get; set; }
         public DateTime AddedDate { get; set; }
 
         public ProductToReturnDto()

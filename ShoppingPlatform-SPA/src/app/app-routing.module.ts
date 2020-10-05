@@ -5,6 +5,7 @@ import { HomePageComponent } from './mainPage/home-page/home-page.component';
 import { ProductDetailsComponent } from './mainPage/product-details/product-details.component';
 import { RegistrationComponent } from './registration/registration.component';
 import { ProductDetailsResolver } from './_resolvers/product-details.resolver';
+import { UserDetailsForProductResolver } from './_resolvers/user-details-for-product.resolver';
 
 
 const routes: Routes = [

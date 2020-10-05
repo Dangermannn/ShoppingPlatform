@@ -35,8 +35,8 @@ namespace ShoppingPlatform.API.Controllers
         public async Task<ActionResult<ProductToReturnDto>> GetProduct(int id)
         {
             var product = await _productsRepository.GetProductByIdAsync(id);
-
             var productToReturn = _mapper.Map<ProductToReturnDto>(product);
+
             return productToReturn;
         }
 
@@ -48,5 +48,6 @@ namespace ShoppingPlatform.API.Controllers
 
             return Ok(categoriesToReturn);
         }
+
     }
 }

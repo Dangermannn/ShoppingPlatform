@@ -31,7 +31,6 @@ namespace ShoppingPlatform.API.Controllers
             var usersToReturn = _mapper.Map<IEnumerable<UserToReturnDto>>(users);
             return Ok(usersToReturn);
         }
-
         /*
         [Authorize]
         [HttpGet("{id}")]

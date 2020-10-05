@@ -16,7 +16,7 @@
                 </div>
                 <div>
                     <strong>Seller</strong>
-                    <p>{{ product.sellerName | titlecase }}</p>
+                    <p>{{ product.seller.username | titlecase }}</p>
                 </div>
                 <div>
                     <strong>Annoucement added</strong>
@@ -39,23 +39,23 @@
                 <tab heading="More about seller">
                     <strong>Seller:</strong>
                     <br>
-                    <p>{{ product.sellerName | titlecase }}</p>
+                    <p>{{ product.seller.username | titlecase }}</p>
 
                     <strong>Gender:</strong>
                     <br>
-                    <p>{{ seller.gender | titlecase }}</p>
+                    <p>{{ product.seller.gender | titlecase }}</p>
 
                     <strong>City:</strong>
                     <br>
-                    <p>{{ seller.city | titlecase }}</p>
+                    <p>{{ product.seller.city | titlecase }}</p>
 
                     <strong>Address:</strong>
                     <br>
-                    <p>{{ seller.fullAddress | titlecase }}</p>
+                    <p>{{ product.seller.fullAddress | titlecase }}</p>
 
                     <strong>Description:</strong>
                     <br>
-                    <p>{{ seller?.description | titlecase }}</p>
+                    <p>{{ product.seller.description | titlecase }}</p>
 
                 </tab>
             </tabset>

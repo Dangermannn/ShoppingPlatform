@@ -8,6 +8,6 @@ export interface Product{
     description: string;
     categoryName: string;
     price: number;
-    sellerName: string;
+    seller: User;
     addedDate: Date;
 }
