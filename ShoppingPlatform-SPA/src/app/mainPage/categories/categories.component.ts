@@ -1,5 +1,6 @@
 import { Component, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
 import { NodeClickEventArgs, NodeKeyPressEventArgs, TreeViewComponent } from '@syncfusion/ej2-angular-navigations';
+import { stringify } from 'querystring';
 import { Category } from 'src/app/_models/category';
 import { AlertifyService } from 'src/app/_services/alertify.service';
 import { ProductService } from 'src/app/_services/product.service';
@@ -48,11 +49,17 @@ export class CategoriesComponent implements OnInit {
   @ViewChild ('treevalidate') treevalidate: TreeViewComponent;
 
   public nodeCheck(args: NodeKeyPressEventArgs | NodeClickEventArgs): void {
-    var node = this.treevalidate.getNode('isChecked');
-    var t = this.treevalidate.selectedNodes;
-    var v = this.treevalidate.getTreeData(t[0]);
-    if(t == null)
+    var selectedNode = this.treevalidate.selectedNodes;
+    if(selectedNode == null)
       return;
+    var v = this.treevalidate.getTreeData(selectedNode[0]);
+    //if((Object.values(v[0]))[3])
+    //  return;
+    //if(v[0].hasOwnProperty('hasChild'))
+    //this.alertify.message("HAS CHILD: " + v[0].hasOwnProperty('hasChild').toString());
+    if(v[0].hasOwnProperty('hasChild'))
+      return;
+    //this.alertify.confirm(JSON.stringify(v[0]), () => {});
     this.refreshProductEvent.emit((Object.values(v[0]))[1].toString());
    // this.alertify.warning('Selected: ' + JSON.stringify(v));
     //this.alertify.warning((Object.values(v[0]))[1].toString());
