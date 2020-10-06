@@ -53,16 +53,9 @@ export class CategoriesComponent implements OnInit {
     if(selectedNode == null)
       return;
     var v = this.treevalidate.getTreeData(selectedNode[0]);
-    //if((Object.values(v[0]))[3])
-    //  return;
-    //if(v[0].hasOwnProperty('hasChild'))
-    //this.alertify.message("HAS CHILD: " + v[0].hasOwnProperty('hasChild').toString());
     if(v[0].hasOwnProperty('hasChild'))
       return;
-    //this.alertify.confirm(JSON.stringify(v[0]), () => {});
     this.refreshProductEvent.emit((Object.values(v[0]))[1].toString());
-   // this.alertify.warning('Selected: ' + JSON.stringify(v));
-    //this.alertify.warning((Object.values(v[0]))[1].toString());
   }
 
 }

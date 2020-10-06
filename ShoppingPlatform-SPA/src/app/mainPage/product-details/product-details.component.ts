@@ -24,10 +24,5 @@ export class ProductDetailsComponent implements OnInit {
     this.route.data.subscribe(data => {
       this.product = data['product'];
     });
-    console.log("BEFORE");
-    //this.getSeller(this.product.sellerName);
-    console.log("AFTER");
   }
-
-
 }

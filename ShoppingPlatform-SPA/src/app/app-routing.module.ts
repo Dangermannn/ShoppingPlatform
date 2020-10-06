@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
+import { AccountSettingsComponent } from './account-settings/account-settings.component';
 import { AppComponent } from './app.component';
 import { HomePageComponent } from './mainPage/home-page/home-page.component';
 import { ProductDetailsComponent } from './mainPage/product-details/product-details.component';
@@ -11,6 +12,7 @@ import { UserDetailsForProductResolver } from './_resolvers/user-details-for-pro
 
 const routes: Routes = [
   {path: '', component: HomePageComponent, resolve: {products: ProductListByCategoryResolver} },
+  {path: 'users/accountSettings/:name', component: AccountSettingsComponent},
   {path: 'register', component: RegistrationComponent},
   {path: 'products/:id', component: ProductDetailsComponent, resolve: {product: ProductDetailsResolver}},
   {path: 'products/category/:category', component: HomePageComponent, resolve: {products: ProductListByCategoryResolver}},

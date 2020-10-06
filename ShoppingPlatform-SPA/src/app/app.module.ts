@@ -18,6 +18,7 @@ import { HomePageComponent } from './mainPage/home-page/home-page.component';
 import { ProductDetailsComponent } from './mainPage/product-details/product-details.component';
 import { ProductDetailsResolver } from './_resolvers/product-details.resolver';
 import { ProductListByCategoryResolver } from './_resolvers/product-list-by-category.resolver';
+import { AccountSettingsComponent } from './account-settings/account-settings.component';
 
 @NgModule({   
   declarations: [
@@ -28,7 +29,8 @@ import { ProductListByCategoryResolver } from './_resolvers/product-list-by-cate
     CategoriesComponent,
     RegistrationComponent,
     HomePageComponent,
-    ProductDetailsComponent
+    ProductDetailsComponent,
+    AccountSettingsComponent
   ],
   imports: [
     BrowserModule,  

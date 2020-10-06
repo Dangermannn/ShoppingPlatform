@@ -22,8 +22,6 @@ export class HomePageComponent implements OnInit {
 
   setCategory(category: string){
     this.categoryParameter = category;
-    this.alertify.error("CHANGED FILTER");
-    this.alertify.message(this.categoryParameter)
     this.router.navigate(['/products/category/' + this.categoryParameter])
   }
 

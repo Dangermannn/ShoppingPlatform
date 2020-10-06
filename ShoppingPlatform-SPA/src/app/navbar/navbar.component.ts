@@ -1,4 +1,7 @@
+import { Route } from '@angular/compiler/src/core';
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { decode } from 'punycode';
 import { Observable } from 'rxjs';
 import { User } from '../_models/user';
 import { AccountService } from '../_services/account.service';
@@ -13,7 +16,7 @@ export class NavbarComponent implements OnInit {
   loginModel: any = {}
   navbarOpened = false;
 
-  constructor(public accountService: AccountService, private alertify: AlertifyService) { }
+  constructor(public accountService: AccountService, private alertify: AlertifyService, private router: Router) { }
 
   ngOnInit(): void {
   }
@@ -32,5 +35,12 @@ export class NavbarComponent implements OnInit {
 
   logout(){
     this.accountService.logout();
+  }
+
+  goToAccountSettings(){
+    this.alertify.error(JSON.stringify(this.loginModel));
+    var decodedToken = this.accountService.getDecodedToken(localStorage.getItem('user'));
+    this.alertify.confirm(decodedToken.nameid, () => {});
+    this.router.navigate(['/users/accountSettings/' + decodedToken.nameid]);
   }
 }

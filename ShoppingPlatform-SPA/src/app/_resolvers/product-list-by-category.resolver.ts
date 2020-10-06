@@ -13,7 +13,6 @@ export class ProductListByCategoryResolver implements Resolve<Product[]>{
     constructor(private productService: ProductService, private router: Router, private alertify: AlertifyService) {}
 
     resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<Product[]>  {
-        this.alertify.success("ROUTE PARAM: " + route.params['category']);
         var params = route.params['category'];
         if(params == null)
             return this.productService.getProducts().pipe(

@@ -4,6 +4,7 @@ import { environment } from 'src/environments/environment';
 import { map } from 'rxjs/operators';
 import { User } from '../_models/user';
 import { ReplaySubject } from 'rxjs';
+
 @Injectable({
   providedIn: 'root'
 })
@@ -44,5 +45,9 @@ export class AccountService {
   logout(){
     localStorage.removeItem('user');
     this.currentUserSource.next(null);
+  }
+
+  getDecodedToken(token){
+    return JSON.parse(atob(token.split('.')[1]));
   }
 }
