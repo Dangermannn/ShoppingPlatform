@@ -15,5 +15,7 @@ namespace ShoppingPlatform.API.Dtos
         public string Description { get; set; }
         [Required]
         public string City { get; set; }
+        [Required]
+        public string FullAddress { get; set; }
     }
 }

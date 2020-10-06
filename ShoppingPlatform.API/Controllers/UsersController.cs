@@ -8,6 +8,7 @@ using ShoppingPlatform.API.Interfaces;
 using ShoppingPlatform.API.Entities;
 using AutoMapper;
 using ShoppingPlatform.API.Dtos;
+using System;
 
 namespace ShoppingPlatform.API.Controllers
 {
@@ -49,6 +50,17 @@ namespace ShoppingPlatform.API.Controllers
             var userToReturn = _mapper.Map<UserToReturnDto>(user);
 
             return Ok(userToReturn);
+        }
+
+        [HttpPut("{username}")]
+        public async Task<ActionResult> UpdateUser(string username, UserForUpdateDto userForUpdateDto)
+        {
+            var user = await _userRepository.GetUserByUsernameAsync(username);
+            _mapper.Map(userForUpdateDto, user);
+            if(await _userRepository.SaveAllAsync())
+                return NoContent();
+
+            throw new Exception($"Updating user {username} failed on save!");
         }
 
     }
