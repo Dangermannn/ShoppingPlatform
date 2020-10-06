@@ -1,4 +1,5 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
+import { NodeClickEventArgs, NodeKeyPressEventArgs, TreeViewComponent } from '@syncfusion/ej2-angular-navigations';
 import { Category } from 'src/app/_models/category';
 import { AlertifyService } from 'src/app/_services/alertify.service';
 import { ProductService } from 'src/app/_services/product.service';
@@ -6,10 +7,13 @@ import { ProductService } from 'src/app/_services/product.service';
 @Component({
   selector: 'app-categories',
   //templateUrl: './categories.component.html',
-  template: `<div id='treeparent'><ejs-treeview id='treeelement' [fields]='field'></ejs-treeview></div>`,
+  template: `<div id='treeparent'><ejs-treeview id='treeelement' #treevalidate (nodeClicked)='nodeCheck($event)' [fields]='field'></ejs-treeview></div>`,
   styleUrls: ['./categories.component.css']
 })
 export class CategoriesComponent implements OnInit {
+  @Output() refreshProductEvent = new EventEmitter();
+  @Output() categoryToShow: string;
+
   categories: Category[];
   field: Object;
   constructor(private productService: ProductService, private alertify: AlertifyService) { }
@@ -36,4 +40,22 @@ export class CategoriesComponent implements OnInit {
         delete category.hasChild;
     });
   }
+
+  refreshProducts(category: string){
+    this.refreshProductEvent.emit(category);
+  }
+
+  @ViewChild ('treevalidate') treevalidate: TreeViewComponent;
+
+  public nodeCheck(args: NodeKeyPressEventArgs | NodeClickEventArgs): void {
+    var node = this.treevalidate.getNode('isChecked');
+    var t = this.treevalidate.selectedNodes;
+    var v = this.treevalidate.getTreeData(t[0]);
+    if(t == null)
+      return;
+    this.refreshProductEvent.emit((Object.values(v[0]))[1].toString());
+   // this.alertify.warning('Selected: ' + JSON.stringify(v));
+    //this.alertify.warning((Object.values(v[0]))[1].toString());
+  }
+
 }

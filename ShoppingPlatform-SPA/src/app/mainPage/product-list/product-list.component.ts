@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 import { Product } from 'src/app/_models/product';
 import { AlertifyService } from 'src/app/_services/alertify.service';
 import { ProductService } from 'src/app/_services/product.service';
@@ -10,13 +11,12 @@ import { ProductService } from 'src/app/_services/product.service';
   styleUrls: ['./product-list.component.css']
 })
 export class ProductListComponent implements OnInit {
-  products: Product[];
-  
-  constructor(private productService: ProductService, private alertify: AlertifyService) { }
+  @Input() products: Product[];
+
+  constructor(private productService: ProductService, private alertify: AlertifyService, private route: ActivatedRoute) { }
 
   ngOnInit(): void {
-    this.loadMembers();
-    console.log('constructor');
+
   }
 
   loadMembers(){

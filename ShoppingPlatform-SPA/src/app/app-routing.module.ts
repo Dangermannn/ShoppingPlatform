@@ -5,13 +5,15 @@ import { HomePageComponent } from './mainPage/home-page/home-page.component';
 import { ProductDetailsComponent } from './mainPage/product-details/product-details.component';
 import { RegistrationComponent } from './registration/registration.component';
 import { ProductDetailsResolver } from './_resolvers/product-details.resolver';
+import { ProductListByCategoryResolver } from './_resolvers/product-list-by-category.resolver';
 import { UserDetailsForProductResolver } from './_resolvers/user-details-for-product.resolver';
 
 
 const routes: Routes = [
-  {path: '', component: HomePageComponent },
+  {path: '', component: HomePageComponent, resolve: {products: ProductListByCategoryResolver} },
   {path: 'register', component: RegistrationComponent},
   {path: 'products/:id', component: ProductDetailsComponent, resolve: {product: ProductDetailsResolver}},
+  {path: 'products/category/:category', component: HomePageComponent, resolve: {products: ProductListByCategoryResolver}},
   {path: '**', component: AppComponent, pathMatch: 'full'},
 ];
 

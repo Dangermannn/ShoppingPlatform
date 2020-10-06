@@ -8,27 +8,26 @@ import { AlertifyService } from '../_services/alertify.service';
 import { ProductService } from '../_services/product.service';
 
 @Injectable()
-export class ProductDetailsResolver implements Resolve<Product>{
+export class ProductListByCategoryResolver implements Resolve<Product[]>{
 
     constructor(private productService: ProductService, private router: Router, private alertify: AlertifyService) {}
 
-    resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<Product>  {
-        return this.productService.getProduct(route.params['id']).pipe(
+    resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<Product[]>  {
+        this.alertify.success("ROUTE PARAM: " + route.params['category']);
+        var params = route.params['category'];
+        if(params == null)
+            return this.productService.getProducts().pipe(
+                catchError(error => {
+                    this.alertify.error('Problem retrieving data: ALL');
+                    return of(null);
+                } )
+            );
+        return this.productService.getProductsByCategory(route.params['category']).pipe(
             catchError(error => {
                 this.alertify.error('Problem retrieving data');
-                this.router.navigate(['/']);
                 return of(null);
             })
         );
-         /*
-        return this.productService.getProduct(route.params['id']).pipe(
-            catchError(error => {
-                this.alertify.error('Problem retrieving data');
-                this.router.navigate(['/']);
-                return of(null);
-            })
-        );
-        */
     }
 
 }

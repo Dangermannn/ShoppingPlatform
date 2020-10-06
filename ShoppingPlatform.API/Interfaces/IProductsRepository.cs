@@ -8,6 +8,7 @@ namespace ShoppingPlatform.API.Interfaces
     {
         Task<Product> GetProductByIdAsync(int id);
         Task<IEnumerable<Product>> GetProductsAsync();
+        Task<IEnumerable<Product>> GetProductsByCategoryAsync(string category);
         Task<bool> SaveAllAsync();
         void Update(Product product);
         Task<IEnumerable<Category>> GetCategories();

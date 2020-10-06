@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using ShoppingPlatform.API.Entities;
@@ -16,6 +17,11 @@ namespace ShoppingPlatform.API.Data
         public async Task<Product> GetProductByIdAsync(int id)
         {
             return await _context.Products.Include(p => p.Category).Include(p => p.Seller).FirstOrDefaultAsync(p => p.Id == id);
+        }
+
+        public async Task<IEnumerable<Product>> GetProductsByCategoryAsync(string category)
+        {
+            return await _context.Products.Include(p => p.Category).Include(p => p.Seller).Where(p => p.Category.Name == category).ToListAsync();
         }
 
         public async Task<IEnumerable<Product>> GetProductsAsync()

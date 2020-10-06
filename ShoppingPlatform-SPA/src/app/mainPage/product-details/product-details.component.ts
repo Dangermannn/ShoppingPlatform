@@ -14,6 +14,7 @@ import { UserService } from 'src/app/_services/user.service';
   styleUrls: ['./product-details.component.css']
 })
 export class ProductDetailsComponent implements OnInit {
+  @Input() categoryParameter: string;
   product: Product;
   seller: User;
 

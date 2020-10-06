@@ -17,6 +17,7 @@ import { RegistrationComponent } from './registration/registration.component';
 import { HomePageComponent } from './mainPage/home-page/home-page.component';
 import { ProductDetailsComponent } from './mainPage/product-details/product-details.component';
 import { ProductDetailsResolver } from './_resolvers/product-details.resolver';
+import { ProductListByCategoryResolver } from './_resolvers/product-list-by-category.resolver';
 
 @NgModule({   
   declarations: [
@@ -41,7 +42,7 @@ import { ProductDetailsResolver } from './_resolvers/product-details.resolver';
     BsDropdownModule.forRoot(),
     ReactiveFormsModule
   ],
-  providers: [ProductDetailsResolver],
+  providers: [ProductDetailsResolver, ProductListByCategoryResolver],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
