@@ -8,11 +8,12 @@ import { RegistrationComponent } from './registration/registration.component';
 import { ProductDetailsResolver } from './_resolvers/product-details.resolver';
 import { ProductListByCategoryResolver } from './_resolvers/product-list-by-category.resolver';
 import { UserDetailsForProductResolver } from './_resolvers/user-details-for-product.resolver';
+import { UserEditResolver } from './_resolvers/user-edit.resolver';
 
 
 const routes: Routes = [
   {path: '', component: HomePageComponent, resolve: {products: ProductListByCategoryResolver} },
-  {path: 'users/accountSettings/:name', component: AccountSettingsComponent},
+  {path: 'users/accountSettings/:name', component: AccountSettingsComponent, resolve: {user: UserEditResolver}},
   {path: 'register', component: RegistrationComponent},
   {path: 'products/:id', component: ProductDetailsComponent, resolve: {product: ProductDetailsResolver}},
   {path: 'products/category/:category', component: HomePageComponent, resolve: {products: ProductListByCategoryResolver}},

@@ -1,1 +1,38 @@
-<p>account-settings works!</p>
+<div class="container m-3">
+    <div class="row">
+        <div class="col-sm-8">
+            <div *ngIf="editAccoutForm.dirty" class="alert alert-info">
+              <strong>Information:</strong> You have made changes. Any unsaved changes
+              will be lost!
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-sm-8">
+            <h4><strong>Edit your profile</strong></h4>
+            <form #editAccoutForm="ngForm">
+                <label class="control-label">Gender:</label>
+                <br>
+                <label class="radio-inline mr-2">
+                    <input name="gender" class="mr-2" value="male" type="radio" [(ngModel)]="user.gender"/>Male
+                </label>
+                <label class="radio-inline">
+                    <input name="gender" class="mr-2" value="female" type="radio" [(ngModel)]="user.gender">Female
+                </label>
+        
+                <h4>Description</h4>
+                <textarea class="form-control" name="description" rows="6" [(ngModel)]="user.description"></textarea>
+        
+                <label class="mt-4" for="city">City</label>
+                <input class="form-control" name="city" type="text" [(ngModel)]="user.city">
+        
+                <label class="mt-4" for="fullAddress">Full Address</label>
+                <input class="form-control" name="address" type="text" [(ngModel)]="user.fullAddress">
+        
+        
+            </form>
+            <button class="btn btn-primary mt-5" [disabled]="!editAccoutForm.dirty" form="editAccountForm" (click)="updateUser()">Save changes</button>
+        </div>
+    </div>
+</div>

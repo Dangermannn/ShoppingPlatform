@@ -38,9 +38,7 @@ export class NavbarComponent implements OnInit {
   }
 
   goToAccountSettings(){
-    this.alertify.error(JSON.stringify(this.loginModel));
     var decodedToken = this.accountService.getDecodedToken(localStorage.getItem('user'));
-    this.alertify.confirm(decodedToken.nameid, () => {});
     this.router.navigate(['/users/accountSettings/' + decodedToken.nameid]);
   }
 }

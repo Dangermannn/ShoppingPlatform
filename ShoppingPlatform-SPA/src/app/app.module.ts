@@ -19,6 +19,7 @@ import { ProductDetailsComponent } from './mainPage/product-details/product-deta
 import { ProductDetailsResolver } from './_resolvers/product-details.resolver';
 import { ProductListByCategoryResolver } from './_resolvers/product-list-by-category.resolver';
 import { AccountSettingsComponent } from './account-settings/account-settings.component';
+import { UserEditResolver } from './_resolvers/user-edit.resolver';
 
 @NgModule({   
   declarations: [
@@ -44,7 +45,7 @@ import { AccountSettingsComponent } from './account-settings/account-settings.co
     BsDropdownModule.forRoot(),
     ReactiveFormsModule
   ],
-  providers: [ProductDetailsResolver, ProductListByCategoryResolver],
+  providers: [ProductDetailsResolver, ProductListByCategoryResolver, UserEditResolver],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
