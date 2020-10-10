@@ -20,6 +20,7 @@ import { ProductDetailsResolver } from './_resolvers/product-details.resolver';
 import { ProductListByCategoryResolver } from './_resolvers/product-list-by-category.resolver';
 import { AccountSettingsComponent } from './account-settings/account-settings.component';
 import { UserEditResolver } from './_resolvers/user-edit.resolver';
+import { TransactionsComponent } from './transactions/transactions.component';
 
 @NgModule({   
   declarations: [
@@ -31,7 +32,8 @@ import { UserEditResolver } from './_resolvers/user-edit.resolver';
     RegistrationComponent,
     HomePageComponent,
     ProductDetailsComponent,
-    AccountSettingsComponent
+    AccountSettingsComponent,
+    TransactionsComponent
   ],
   imports: [
     BrowserModule,  
