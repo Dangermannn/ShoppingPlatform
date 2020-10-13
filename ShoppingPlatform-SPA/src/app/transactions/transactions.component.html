@@ -1,1 +1,23 @@
-<p *ngFor="let transaction of transactions">{{ transaction.price }}</p>
+<div class="p-3 mt-5">
+    <table class="table table-striped">
+        <thead class="thead-dark">
+            <th scope="col">Id</th>
+            <th scope="col">Initialized</th>
+            <th scope="col">Seller</th>  
+            <th scope="col">Price</th>  
+            <th scope="col">Items count</th>
+            <th scope="col">Details</th>
+        <tbody>
+            <tr *ngFor="let transaction of transactions">
+                <td>{{ transaction.id }}</td>
+                <td>{{ transaction.initialized | date: 'short' }}</td>
+                <td> {{ transaction.seller.username == this.currentUsername ? 'Me' : transaction.seller.username }}</td>
+                <td>{{ transaction.price }}</td>
+                <td>{{ transaction.products.length }}</td>
+                <td><a href="#">Details</a></td>
+            </tr>
+        </tbody>
+    </table>
+
+    <p>TAK: {{this.currentUsername}}</p>
+</div>

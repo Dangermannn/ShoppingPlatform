@@ -14,7 +14,7 @@ export class TransactionListResolver implements Resolve<Product[]>{
     constructor(private transactionService: TransactionService, private router: Router, private alertify: AlertifyService) {}
 
     resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<Product[]>  {
-        return this.transactionService.getTransactions().pipe(
+        return this.transactionService.getTransactionsOfUser(route.params['name']).pipe(
             catchError(error => {
                 this.alertify.error('Problem retrieving data');
                 this.router.navigate(['/']);
