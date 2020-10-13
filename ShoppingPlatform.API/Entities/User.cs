@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 
 namespace ShoppingPlatform.API.Entities
 {
@@ -13,5 +14,7 @@ namespace ShoppingPlatform.API.Entities
         public string Description { get; set; }
         public string City { get; set; }
         public string FullAddress { get; set; }
+        ICollection<Transaction> Sold { get; set; }
+        ICollection<Transaction> Bought { get; set; }
     }
 }

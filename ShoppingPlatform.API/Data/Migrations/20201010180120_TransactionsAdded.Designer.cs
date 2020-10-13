@@ -3,60 +3,23 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using ShoppingPlatform.API.Data;
 
 namespace ShoppingPlatform.API.Data.Migrations
 {
     [DbContext(typeof(DataContext))]
-    partial class DataContextModelSnapshot : ModelSnapshot
+    [Migration("20201010180120_TransactionsAdded")]
+    partial class TransactionsAdded
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
                 .HasAnnotation("ProductVersion", "3.1.8")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-            modelBuilder.Entity("ShoppingPlatform.API.Entities.ArchivedProduct", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<DateTime>("AddedDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<int?>("CategoryId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Description")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<decimal>("Price")
-                        .HasColumnType("decimal(18,2)");
-
-                    b.Property<int?>("SellerId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Title")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int?>("TransactionId")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("CategoryId");
-
-                    b.HasIndex("SellerId");
-
-                    b.HasIndex("TransactionId");
-
-                    b.ToTable("ArchivedProduct");
-                });
 
             modelBuilder.Entity("ShoppingPlatform.API.Entities.Category", b =>
                 {
@@ -106,11 +69,16 @@ namespace ShoppingPlatform.API.Data.Migrations
                     b.Property<string>("Title")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int?>("TransactionId")
+                        .HasColumnType("int");
+
                     b.HasKey("Id");
 
                     b.HasIndex("CategoryId");
 
                     b.HasIndex("SellerId");
+
+                    b.HasIndex("TransactionId");
 
                     b.ToTable("Products");
                 });
@@ -179,21 +147,6 @@ namespace ShoppingPlatform.API.Data.Migrations
                     b.ToTable("Users");
                 });
 
-            modelBuilder.Entity("ShoppingPlatform.API.Entities.ArchivedProduct", b =>
-                {
-                    b.HasOne("ShoppingPlatform.API.Entities.Category", "Category")
-                        .WithMany()
-                        .HasForeignKey("CategoryId");
-
-                    b.HasOne("ShoppingPlatform.API.Entities.User", "Seller")
-                        .WithMany()
-                        .HasForeignKey("SellerId");
-
-                    b.HasOne("ShoppingPlatform.API.Entities.Transaction", null)
-                        .WithMany("Products")
-                        .HasForeignKey("TransactionId");
-                });
-
             modelBuilder.Entity("ShoppingPlatform.API.Entities.Category", b =>
                 {
                     b.HasOne("ShoppingPlatform.API.Entities.Category", "ParentCategory")
@@ -210,6 +163,10 @@ namespace ShoppingPlatform.API.Data.Migrations
                     b.HasOne("ShoppingPlatform.API.Entities.User", "Seller")
                         .WithMany()
                         .HasForeignKey("SellerId");
+
+                    b.HasOne("ShoppingPlatform.API.Entities.Transaction", null)
+                        .WithMany("Products")
+                        .HasForeignKey("TransactionId");
                 });
 
             modelBuilder.Entity("ShoppingPlatform.API.Entities.Transaction", b =>

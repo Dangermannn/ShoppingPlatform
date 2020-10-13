@@ -15,6 +15,10 @@ namespace ShoppingPlatform.API.Helpers
             CreateMap<Category, CategoryToReturnDto>()
                 .ForMember(dest => dest.ParentCategoryId, opt => opt.MapFrom(src => src.ParentCategory.Id)).ReverseMap();
             CreateMap<User, UserForUpdateDto>().ReverseMap();
+            CreateMap<Transaction, TransactionToReturnDto>()
+                .ForMember(dest => dest.Buyer, opt => opt.MapFrom(src => src.Buyer))
+                .ForMember(dest => dest.Seller, opt => opt.MapFrom(src => src.Seller));
+            CreateMap<ArchivedProduct, ArchivedProductToReturnDto>();
         }
     }
 }

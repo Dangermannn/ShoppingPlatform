@@ -16,6 +16,7 @@ namespace ShoppingPlatform.API.Extensions
             services.AddScoped<ITokenService, TokenService>();
             services.AddScoped<IUserRepository, UserRepository>();
             services.AddScoped<IProductsRepository, ProductRepository>();
+            services.AddScoped<ITransactionRepository, TransactionRepository>();
             services.AddAutoMapper(typeof(AutoMapperProfiles).Assembly);
             services.AddDbContext<DataContext>(options =>
             {
