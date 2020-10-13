@@ -30,6 +30,15 @@ namespace ShoppingPlatform.API.Controllers
             return Ok(transactionsToReturn);
         }
 
+        [HttpGet("{name}")]
+        public async Task<ActionResult<IEnumerable<TransactionToReturnDto>>> GetAllUserTransactions(string name)
+        {
+            var transactions = await _transactionRepository.GetAllUserTransactionsAsync(name);
+
+            var transactionsToReturn = _mapper.Map<IEnumerable<TransactionToReturnDto>>(transactions);
+            return Ok(transactionsToReturn);
+        }
+
         [HttpGet("{name}/bought")]
         public async Task<ActionResult<IEnumerable<TransactionToReturnDto>>> GetTransactionsSoldBy(string name)
         {
