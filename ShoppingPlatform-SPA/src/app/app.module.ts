@@ -21,6 +21,7 @@ import { ProductListByCategoryResolver } from './_resolvers/product-list-by-cate
 import { AccountSettingsComponent } from './account-settings/account-settings.component';
 import { UserEditResolver } from './_resolvers/user-edit.resolver';
 import { TransactionsComponent } from './transactions/transactions.component';
+import { TransactionListResolver } from './_resolvers/transaction-list.resolver';
 
 @NgModule({   
   declarations: [
@@ -47,7 +48,12 @@ import { TransactionsComponent } from './transactions/transactions.component';
     BsDropdownModule.forRoot(),
     ReactiveFormsModule
   ],
-  providers: [ProductDetailsResolver, ProductListByCategoryResolver, UserEditResolver],
+  providers: [
+    ProductDetailsResolver,
+    ProductListByCategoryResolver,
+    UserEditResolver,
+    TransactionListResolver
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

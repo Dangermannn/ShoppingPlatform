@@ -41,4 +41,9 @@ export class NavbarComponent implements OnInit {
     var decodedToken = this.accountService.getDecodedToken(localStorage.getItem('user'));
     this.router.navigate(['/users/accountSettings/' + decodedToken.nameid]);
   }
+
+  goToTransactions(){
+    var decodedToken = this.accountService.getDecodedToken(localStorage.getItem('user'));
+    this.router.navigate(['/users/transactions/' + decodedToken.nameid]);
+  }
 }
