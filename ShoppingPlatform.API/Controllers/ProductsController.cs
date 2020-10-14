@@ -58,5 +58,20 @@ namespace ShoppingPlatform.API.Controllers
             return Ok(categoriesToReturn);
         }
 
+        [HttpDelete("{id}")]
+        public async Task<ActionResult> DeleteProduct(int id)
+        {
+            var product = await _productsRepository.GetProductByIdAsync(id);
+            if(product == null)
+                return BadRequest();
+            
+            if(product != null)
+                _productsRepository.DeleteProduct(product);
+
+            if(await _productsRepository.SaveAllAsync())
+                return Ok();
+            
+            return BadRequest("Failed to delete product");
+        }
     }
 }

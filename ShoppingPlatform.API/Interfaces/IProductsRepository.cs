@@ -11,6 +11,8 @@ namespace ShoppingPlatform.API.Interfaces
         Task<IEnumerable<Product>> GetProductsByCategoryAsync(string category);
         Task<bool> SaveAllAsync();
         void Update(Product product);
+        void DeleteProduct(Product product);
+        Task<Category> GetCategory(string category);
         Task<IEnumerable<Category>> GetCategories();
     }
 }

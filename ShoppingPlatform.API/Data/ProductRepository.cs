@@ -14,6 +14,11 @@ namespace ShoppingPlatform.API.Data
         {
             _context = context;
         }
+        public void DeleteProduct(Product product)
+        {
+            _context.Remove(product);
+        }
+        
         public async Task<Product> GetProductByIdAsync(int id)
         {
             return await _context.Products.Include(p => p.Category).Include(p => p.Seller).FirstOrDefaultAsync(p => p.Id == id);
@@ -42,6 +47,11 @@ namespace ShoppingPlatform.API.Data
         public async Task<IEnumerable<Category>> GetCategories()
         {
             return await _context.Categories.ToListAsync();
+        }
+
+        public async Task<Category> GetCategory(string category)
+        {
+            return await _context.Categories.FirstOrDefaultAsync(c => c.Name == category);
         }
     }
 }
