@@ -14,11 +14,16 @@ namespace ShoppingPlatform.API.Data
         {
             _context = context;
         }
+
+        public void AddProduct(Product product)
+        {
+            _context.Add(product);
+        }
         public void DeleteProduct(Product product)
         {
             _context.Remove(product);
         }
-        
+
         public async Task<Product> GetProductByIdAsync(int id)
         {
             return await _context.Products.Include(p => p.Category).Include(p => p.Seller).FirstOrDefaultAsync(p => p.Id == id);

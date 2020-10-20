@@ -15,9 +15,11 @@ namespace ShoppingPlatform.API.Controllers
     public class ProductsController : ControllerBase
     {
         private readonly IProductsRepository _productsRepository;
+        private readonly IUserRepository _userRepository;
         private readonly IMapper _mapper;
-        public ProductsController(IProductsRepository productsRepository, IMapper mapper)
+        public ProductsController(IProductsRepository productsRepository, IUserRepository userRepository, IMapper mapper)
         {
+            _userRepository = userRepository;
             _mapper = mapper;
             _productsRepository = productsRepository;
         }
@@ -62,16 +64,39 @@ namespace ShoppingPlatform.API.Controllers
         public async Task<ActionResult> DeleteProduct(int id)
         {
             var product = await _productsRepository.GetProductByIdAsync(id);
-            if(product == null)
+            if (product == null)
                 return BadRequest();
-            
-            if(product != null)
+
+            if (product != null)
                 _productsRepository.DeleteProduct(product);
 
-            if(await _productsRepository.SaveAllAsync())
+            if (await _productsRepository.SaveAllAsync())
                 return Ok();
-            
+
             return BadRequest("Failed to delete product");
+        }
+
+        [HttpPost]
+        public async Task<ActionResult> AddProduct(ProductForCreationDto productForCreationDto)
+        {
+            var category = await _productsRepository.GetCategory(productForCreationDto.CategoryName);
+            var seller = await _userRepository.GetUserByIdAsync(productForCreationDto.SellerId);
+            if (category == null || seller == null)
+                return BadRequest();
+
+            var product = new Product
+            {
+                Title = productForCreationDto.Title,
+                Description = productForCreationDto.Description,
+                Category = category,
+                Price = productForCreationDto.Price,
+                Seller = seller
+            };
+
+            _productsRepository.AddProduct(product);
+            if (await _productsRepository.SaveAllAsync())
+                return Ok();
+            return BadRequest();
         }
     }
 }
