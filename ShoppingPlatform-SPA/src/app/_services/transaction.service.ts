@@ -26,4 +26,8 @@ export class TransactionService {
   getTransactionsBoughtByUser(name: string){
     return this.http.get<Transaction[]>(this.baseUrl + 'transactions/' + name + '/bought');
   }
+  
+  getTransactionById(id: number, name: string){
+    return this.http.get<Transaction>(this.baseUrl + 'transactions/' + name + '/' + id);
+  }
 }

@@ -56,6 +56,15 @@ namespace ShoppingPlatform.API.Controllers
             var transactionsToReturn = _mapper.Map<IEnumerable<TransactionToReturnDto>>(transactions);
             return Ok(transactionsToReturn);
         }
+
+        [HttpGet("{name}/{id}")]
+        public async Task<ActionResult<IEnumerable<TransactionToReturnDto>>> GetTransactionsDetails(int id)
+        {
+            var transaction = await _transactionRepository.GetTransactionByIdAsync(id);
+
+            var transactionToReturn = _mapper.Map<TransactionToReturnDto>(transaction);
+            return Ok(transactionToReturn);
+        }
         
     }
 }

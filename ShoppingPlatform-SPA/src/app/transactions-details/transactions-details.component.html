@@ -1,0 +1,88 @@
+<div class="container mt-5">
+    <div class="card">
+        <div class="card-header">
+          Transaction ordered by {{ transaction.seller.username }}
+        </div>
+        <div class="card-body">
+            <div>
+                <strong>Price</strong>
+                <p>{{ transaction.price }}</p>
+            </div>
+            <div>
+                <strong>Initialized</strong>
+                <p>{{ transaction.initialized | date: 'short' }}</p>
+            </div>
+            <hr>
+            <strong>Details about buyer</strong>
+            <hr>
+            <div>
+                <strong>Buyer:</strong>
+                <br>
+                <p>{{ transaction.buyer.username | titlecase }}</p>
+        
+                <strong>Gender:</strong>
+                <br>
+                <p>{{ transaction.buyer.gender | titlecase }}</p>
+        
+                <strong>City:</strong>
+                <br>
+                <p>{{ transaction.buyer.city | titlecase }}</p>
+        
+                <strong>Address:</strong>
+                <br>
+                <p>{{ transaction.buyer.fullAddress | titlecase }}</p>
+        
+                <strong>Description:</strong>
+                <br>
+                <p>{{ transaction.buyer.description | titlecase }}</p>
+        
+            </div>
+            <hr>
+            <strong>Details about seller</strong>
+            <hr>
+            <div>
+                <strong>Seller:</strong>
+                <br>
+                <p>{{ transaction.seller.username | titlecase }}</p>
+        
+                <strong>Gender:</strong>
+                <br>
+                <p>{{ transaction.seller.gender | titlecase }}</p>
+        
+                <strong>City:</strong>
+                <br>
+                <p>{{ transaction.seller.city | titlecase }}</p>
+        
+                <strong>Address:</strong>
+                <br>
+                <p>{{ transaction.seller.fullAddress | titlecase }}</p>
+        
+                <strong>Description:</strong>
+                <br>
+                <p>{{ transaction.seller.description | titlecase }}</p>
+        
+            </div>
+
+            <hr>
+            <h2>Products</h2>
+            <hr>
+            <div class="p-3 mt-5">
+                <table class="table table-striped">
+                    <thead class="thead-dark">
+                        <th scope="col">Product title</th>
+                        <th scope="col">Category name</th>
+                        <th scope="col">Price</th>  
+                        <th scope="col">Details</th>
+                    <tbody>
+                        <tr *ngFor="let product of transaction.products">
+                            <td>{{ product.title }}</td>
+                            <td>{{ product.categoryName }}</td>
+                            <td>{{ product.price }}</td>
+                            <td><a [routerLink]="['/products']" routerLinkActive="router-link-active">Details</a></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>

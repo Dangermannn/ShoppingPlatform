@@ -22,6 +22,8 @@ import { AccountSettingsComponent } from './account-settings/account-settings.co
 import { UserEditResolver } from './_resolvers/user-edit.resolver';
 import { TransactionsComponent } from './transactions/transactions.component';
 import { TransactionListResolver } from './_resolvers/transaction-list.resolver';
+import { TransactionsDetailsComponent } from './transactions-details/transactions-details.component';
+import { TransactionDetailsResolver } from './_resolvers/transaction-details.resolver';
 
 @NgModule({   
   declarations: [
@@ -34,7 +36,8 @@ import { TransactionListResolver } from './_resolvers/transaction-list.resolver'
     HomePageComponent,
     ProductDetailsComponent,
     AccountSettingsComponent,
-    TransactionsComponent
+    TransactionsComponent,
+    TransactionsDetailsComponent
   ],
   imports: [
     BrowserModule,  
@@ -52,7 +55,8 @@ import { TransactionListResolver } from './_resolvers/transaction-list.resolver'
     ProductDetailsResolver,
     ProductListByCategoryResolver,
     UserEditResolver,
-    TransactionListResolver
+    TransactionListResolver,
+    TransactionDetailsResolver
   ],
   bootstrap: [AppComponent]
 })
