@@ -11,5 +11,7 @@ namespace ShoppingPlatform.API.Entities
         public User Buyer { get; set; }
         public decimal Price { get; set; }
         public ICollection<ArchivedProduct> Products { get; set; }
+        public bool IsVisibleBySeller { get; set; }
+        public bool IsVisibleByBuyer { get; set; }
     }
 }

@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using System.Transactions;
@@ -34,7 +35,6 @@ namespace ShoppingPlatform.API.Controllers
         public async Task<ActionResult<IEnumerable<TransactionToReturnDto>>> GetAllUserTransactions(string name)
         {
             var transactions = await _transactionRepository.GetAllUserTransactionsAsync(name);
-
             var transactionsToReturn = _mapper.Map<IEnumerable<TransactionToReturnDto>>(transactions);
             return Ok(transactionsToReturn);
         }
@@ -66,5 +66,19 @@ namespace ShoppingPlatform.API.Controllers
             return Ok(transactionToReturn);
         }
         
+        [HttpPost("{name}/{id}")]
+        public async Task<ActionResult<Transaction>> UpdateTransactionVisibility(string name, int id)
+        {
+            var transaction = await _transactionRepository.GetTransactionByIdAsync(id);
+            if(transaction.Buyer.Username == name)
+                transaction.IsVisibleByBuyer = false;
+            else
+                transaction.IsVisibleBySeller = false;
+            
+            if(await _transactionRepository.SaveAllAsync())
+                return NoContent();
+            
+            throw new Exception($"Failed while updating a transaction");
+        }
     }
 }

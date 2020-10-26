@@ -33,9 +33,8 @@ namespace ShoppingPlatform.API.Data
         public async Task<IEnumerable<Transaction>> GetAllUserTransactionsAsync(string name)
         {
             return await _context.Transactions.Include(t => t.Seller).Include(t => t.Buyer).Include(t => t.Products)
-                .Where(t => t.Seller.Username == name || t.Buyer.Username == name).ToListAsync();
+                .Where(t => (t.Seller.Username == name && t.IsVisibleBySeller) || (t.Buyer.Username == name && t.IsVisibleByBuyer)).ToListAsync();
         }
-
 
         public async Task<IEnumerable<Transaction>> GetTransactionsBySellerNameAsync(string name)
         {
