@@ -46,4 +46,8 @@ export class NavbarComponent implements OnInit {
     var decodedToken = this.accountService.getDecodedToken(localStorage.getItem('user'));
     this.router.navigate(['/users/transactions/' + decodedToken.nameid]);
   }
+
+  goToShoppingCard(){
+    this.router.navigate(['/users/shoppingCart']);
+  }
 }

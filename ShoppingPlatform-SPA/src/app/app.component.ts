@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { environment } from 'src/environments/environment';
+import { Product } from './_models/product';
 import { User } from './_models/user';
 import { AccountService } from './_services/account.service';
 
@@ -13,6 +14,7 @@ export class AppComponent implements OnInit {
   title = 'ShoppingPlatform-SPA';
   baseUrl = environment.apiUrl;
   users: any;
+  
   constructor(private http: HttpClient, private accountService: AccountService){}
 
   ngOnInit(): void {

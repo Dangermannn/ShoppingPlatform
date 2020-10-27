@@ -5,6 +5,7 @@ import { AppComponent } from './app.component';
 import { HomePageComponent } from './mainPage/home-page/home-page.component';
 import { ProductDetailsComponent } from './mainPage/product-details/product-details.component';
 import { RegistrationComponent } from './registration/registration.component';
+import { ShoppingCartComponent } from './shopping-cart/shopping-cart.component';
 import { TransactionsDetailsComponent } from './transactions-details/transactions-details.component';
 import { TransactionsComponent } from './transactions/transactions.component';
 import { ProductDetailsResolver } from './_resolvers/product-details.resolver';
@@ -16,6 +17,7 @@ import { UserEditResolver } from './_resolvers/user-edit.resolver';
 
 const routes: Routes = [
   {path: '', component: HomePageComponent, resolve: {products: ProductListByCategoryResolver} },
+  {path: 'users/shoppingCart', component: ShoppingCartComponent},
   {path: 'users/accountSettings/:name', component: AccountSettingsComponent, resolve: {user: UserEditResolver}},
   {path: 'users/transactions/:name', component: TransactionsComponent, resolve: {transactions: TransactionListResolver}},
   {path: 'users/transactions/:name/:id', component: TransactionsDetailsComponent, resolve: {transaction: TransactionDetailsResolver}},
