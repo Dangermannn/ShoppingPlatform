@@ -66,7 +66,7 @@ namespace ShoppingPlatform.API.Controllers
             return Ok(transactionToReturn);
         }
         
-        [HttpPost("{name}/{id}")]
+        [HttpPut("{name}/{id}")]
         public async Task<ActionResult<Transaction>> UpdateTransactionVisibility(string name, int id)
         {
             var transaction = await _transactionRepository.GetTransactionByIdAsync(id);

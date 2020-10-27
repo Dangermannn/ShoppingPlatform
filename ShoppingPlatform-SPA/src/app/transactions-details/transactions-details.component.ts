@@ -18,5 +18,4 @@ export class TransactionsDetailsComponent implements OnInit {
       this.transaction = data['transaction'];
     });
   }
-
 }

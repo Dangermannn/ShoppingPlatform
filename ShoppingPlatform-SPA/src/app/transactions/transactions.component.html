@@ -16,7 +16,7 @@
                 <td>{{ transaction.price }}</td>
                 <td>{{ transaction.products.length }}</td>
                 <td><a [routerLink]="['/users/transactions/' + currentUsername + '/' + transaction.id]" routerLinkActive="router-link-active">Details</a></td>
-                <td><Button class="btn btn-danger" href="#">Remove</Button></td>
+                <td><Button class="btn btn-danger" (click)="updateTransaction(transaction)">Remove</Button></td>
             </tr>
         </tbody>
     </table>

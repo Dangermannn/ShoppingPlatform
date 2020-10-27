@@ -27,7 +27,7 @@ export class AccountSettingsComponent implements OnInit {
     this.userService.updateMember(this.user, decodedToken.nameid).subscribe(data => {
       this.alertify.success('Profile has been updated!');
     }, error => {
-      this.alertify.error(error);
+      this.alertify.error('Error occured while removing a transaction!');
     });
   }
 }

@@ -30,4 +30,8 @@ export class TransactionService {
   getTransactionById(id: number, name: string){
     return this.http.get<Transaction>(this.baseUrl + 'transactions/' + name + '/' + id);
   }
+
+  updateTransaction(id: number, name: string){
+    return this.http.put<Transaction>(this.baseUrl + 'transactions/' + name + '/' + id, {});
+  }
 }
