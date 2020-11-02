@@ -5,11 +5,20 @@ import { Product } from '../_models/product';
   providedIn: 'root'
 })
 export class ShoppingCartService {
-  products: Product[];
+  products: Product[] = [];
   
   constructor() { }
 
   addProduct(product: Product){
+    this.products = JSON.parse(localStorage.getItem('shopping-cart'));
+    if(this.products == null)
+      this.products = [];
     this.products.push(product);
+    localStorage.removeItem('shopping-cart');
+    localStorage.setItem('shopping-cart', JSON.stringify(this.products));
+  }
+
+  getProducts(): Product[]{
+    return JSON.parse(localStorage.getItem('shopping-cart'));
   }
 }

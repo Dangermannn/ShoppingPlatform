@@ -30,5 +30,6 @@ export class ProductDetailsComponent implements OnInit {
 
   addToShoppingCart(){
     this.shoppingCartService.addProduct(this.product);
+    this.alertify.error("EEROR ADDING ITEM");
   }
 }

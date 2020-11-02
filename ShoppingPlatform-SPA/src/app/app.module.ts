@@ -25,6 +25,7 @@ import { TransactionListResolver } from './_resolvers/transaction-list.resolver'
 import { TransactionsDetailsComponent } from './transactions-details/transactions-details.component';
 import { TransactionDetailsResolver } from './_resolvers/transaction-details.resolver';
 import { ShoppingCartComponent } from './shopping-cart/shopping-cart.component';
+import { ShoppingCartResolver } from './_resolvers/shopping-cart.resolver';
 
 @NgModule({   
   declarations: [
@@ -58,7 +59,8 @@ import { ShoppingCartComponent } from './shopping-cart/shopping-cart.component';
     ProductListByCategoryResolver,
     UserEditResolver,
     TransactionListResolver,
-    TransactionDetailsResolver
+    TransactionDetailsResolver,
+    ShoppingCartResolver
   ],
   bootstrap: [AppComponent]
 })

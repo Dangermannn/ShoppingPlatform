@@ -10,6 +10,7 @@ import { TransactionsDetailsComponent } from './transactions-details/transaction
 import { TransactionsComponent } from './transactions/transactions.component';
 import { ProductDetailsResolver } from './_resolvers/product-details.resolver';
 import { ProductListByCategoryResolver } from './_resolvers/product-list-by-category.resolver';
+import { ShoppingCartResolver } from './_resolvers/shopping-cart.resolver';
 import { TransactionDetailsResolver } from './_resolvers/transaction-details.resolver';
 import { TransactionListResolver } from './_resolvers/transaction-list.resolver';
 import { UserEditResolver } from './_resolvers/user-edit.resolver';
@@ -17,7 +18,7 @@ import { UserEditResolver } from './_resolvers/user-edit.resolver';
 
 const routes: Routes = [
   {path: '', component: HomePageComponent, resolve: {products: ProductListByCategoryResolver} },
-  {path: 'users/shoppingCart', component: ShoppingCartComponent},
+  {path: 'users/shoppingCart', component: ShoppingCartComponent, resolve: {products: ShoppingCartResolver}},
   {path: 'users/accountSettings/:name', component: AccountSettingsComponent, resolve: {user: UserEditResolver}},
   {path: 'users/transactions/:name', component: TransactionsComponent, resolve: {transactions: TransactionListResolver}},
   {path: 'users/transactions/:name/:id', component: TransactionsDetailsComponent, resolve: {transaction: TransactionDetailsResolver}},
