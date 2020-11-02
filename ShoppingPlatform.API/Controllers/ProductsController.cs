@@ -98,5 +98,28 @@ namespace ShoppingPlatform.API.Controllers
                 return Ok();
             return BadRequest();
         }
+
+        [HttpPut]
+        public async Task<ActionResult> UpdateProduct(ProductForCreationDto productForCreationDto)
+        {
+                        var category = await _productsRepository.GetCategory(productForCreationDto.CategoryName);
+            var seller = await _userRepository.GetUserByIdAsync(productForCreationDto.SellerId);
+            if (category == null || seller == null)
+                return BadRequest();
+
+            var product = new Product
+            {
+                Title = productForCreationDto.Title,
+                Description = productForCreationDto.Description,
+                Category = category,
+                Price = productForCreationDto.Price,
+                Seller = seller
+            };
+
+            _productsRepository.Update(product);
+            if (await _productsRepository.SaveAllAsync())
+                return Ok();
+            return BadRequest();
+        }
     }
 }

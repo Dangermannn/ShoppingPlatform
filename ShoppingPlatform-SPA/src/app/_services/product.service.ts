@@ -27,4 +27,16 @@ export class ProductService {
   getCategories(){
     return this.http.get<Category[]>(this.baseUrl + 'products/categories');
   }
+
+  addProduct(product: Product){
+    return this.http.post<Product>(this.baseUrl + 'products', product);
+  }
+
+  removeProduct(id: number){
+    return this.http.delete(this.baseUrl + 'products/' + id);
+  }
+
+  updateProduct(product: Product){
+    return this.http.put<Product>(this.baseUrl + 'products', product);
+  }
 }
