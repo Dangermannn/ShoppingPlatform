@@ -1,3 +1,28 @@
-<div *ngFor="let product of products" class="card-list p-2"> 
-    <p>{{product.title}}</p>
+<div class="p-3 mt-5">
+    <table class="table table-striped">
+        <thead class="thead-dark align-middle">
+            <th scope="col">Title</th>
+            <th scope="col">Category name</th>
+            <th scope="col">Seller</th>  
+            <th scope="col">Price</th>  
+            <th scope="col">Details</th>
+            <th scope="col">Remove</th>
+        <tbody>
+            <tr *ngFor="let product of products">
+                <td>{{ product.title }}</td>
+                <td>{{ product.categoryName }}</td>
+                <td>{{ product.seller.username }}</td>
+                <td>{{ product.price }}</td>
+                <td><a [routerLink]="['/products/' + product.id]" routerLinkActive="router-link-active">Details</a></td>
+                <td>
+                    <button class="btn btn-danger">
+                        <i class="fa fa-trash"></i>
+                        Remove
+                    </button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+
+    <button class="btn btn-primary float-right mr-5 mt-5"><i class="fa fa-shopping-bag mr-2"></i>Order</button>
 </div>
