@@ -1,0 +1,83 @@
+<div class="container m-3">
+    <div class="row">
+        <h1>Creating new product</h1>
+    </div>
+
+    <div class="row">
+        <div class="col-sm-8">
+            <h4><strong>Add new product</strong></h4>
+            <form [formGroup]="productForm" (ngSubmit)="addProduct()">
+                <div class="form-group">
+                    <label class="mt-4" for="title">Title</label>
+                    <input class="form-control"
+                           name="title"
+                           type="text" 
+                           placeholder="title"
+                           formControlName="title"
+                           [ngClass]="{'is-invalid': productForm.get('title').errors && productForm.get('title').touched}">
+                    <div class="invalid-feedback"
+                         *ngIf="productForm.get('title').hasError('required') && productForm.get('title').touched">
+                           Title is required
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                        <select formControlName="categoryName" name="categoryName" id="category" class="form-control">
+                            <option *ngFor="let category of categories"
+                                    [hidden]="category.hasChild" 
+                                    [value]="category.name"
+                                    >{{ category.name }}</option>
+                        </select>
+                </div>
+
+                <div class="form-group">       
+                    <h4>Description</h4>
+                    <textarea class="form-control"
+                              name="description" 
+                              rows="6" 
+                              placeholder="title"
+                              formControlName="description"
+                              [ngClass]="{'is-invalid': productForm.get('description').errors && productForm.get('description').touched}"
+                              ></textarea>
+                        <div class="invalid-feedback"
+                             *ngIf="productForm.get('description').hasError('required') && productForm.get('description').touched">
+                             Description is required is required
+                        </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="mt-4" for="city">City</label>
+                    <input class="form-control"
+                           name="city"
+                           type="text"
+                           placeholder="city"
+                           formControlName="city"
+                           [ngClass]="{'is-invalid': productForm.get('city').errors && productForm.get('city').touched}"
+                           > 
+                    <div class="invalid-feedback"
+                         *ngIf="productForm.get('city').hasError('required') && productForm.get('city').touched">
+                         Description is required is required
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="mt-4" for="price">Price</label>
+                    <input class="form-control" 
+                           name="price" 
+                           type="text"
+                           placeholder="price"
+                           formControlName="price"
+                           [ngClass]="{'is-invalid': productForm.get('price').errors && productForm.get('price').touched}"
+                           > 
+                    <div class="invalid-feedback"
+                         *ngIf="productForm.get('city').hasError('required') && productForm.get('city').touched">
+                         Description is required is required
+                    </div>
+                </div>
+                <div class="form-group">
+                    <button class="btn btn-primary mt-5" [disabled]="!productForm.valid" type="submit">Add product</button>
+                </div>
+            </form>        
+        </div>
+    </div>
+</div>

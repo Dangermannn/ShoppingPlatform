@@ -80,9 +80,9 @@ namespace ShoppingPlatform.API.Controllers
         public async Task<ActionResult> AddProduct(ProductForCreationDto productForCreationDto)
         {
             var category = await _productsRepository.GetCategory(productForCreationDto.CategoryName);
-            var seller = await _userRepository.GetUserByIdAsync(productForCreationDto.SellerId);
+            var seller = await _userRepository.GetUserByUsernameAsync(productForCreationDto.SellerName);
             if (category == null || seller == null)
-                return BadRequest();
+                return BadRequest("Cannot find a category or seller");
 
             var product = new Product
             {
@@ -102,8 +102,8 @@ namespace ShoppingPlatform.API.Controllers
         [HttpPut]
         public async Task<ActionResult> UpdateProduct(ProductForCreationDto productForCreationDto)
         {
-                        var category = await _productsRepository.GetCategory(productForCreationDto.CategoryName);
-            var seller = await _userRepository.GetUserByIdAsync(productForCreationDto.SellerId);
+            var category = await _productsRepository.GetCategory(productForCreationDto.CategoryName);
+            var seller = await _userRepository.GetUserByUsernameAsync(productForCreationDto.SellerName);
             if (category == null || seller == null)
                 return BadRequest();
 

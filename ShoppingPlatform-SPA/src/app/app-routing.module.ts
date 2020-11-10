@@ -4,6 +4,7 @@ import { AccountSettingsComponent } from './account-settings/account-settings.co
 import { AppComponent } from './app.component';
 import { HomePageComponent } from './mainPage/home-page/home-page.component';
 import { ProductDetailsComponent } from './mainPage/product-details/product-details.component';
+import { ProductCreatorComponent } from './product-creator/product-creator.component';
 import { RegistrationComponent } from './registration/registration.component';
 import { ShoppingCartComponent } from './shopping-cart/shopping-cart.component';
 import { TransactionsDetailsComponent } from './transactions-details/transactions-details.component';
@@ -23,6 +24,7 @@ const routes: Routes = [
   {path: 'users/transactions/:name', component: TransactionsComponent, resolve: {transactions: TransactionListResolver}},
   {path: 'users/transactions/:name/:id', component: TransactionsDetailsComponent, resolve: {transaction: TransactionDetailsResolver}},
   {path: 'register', component: RegistrationComponent},
+  {path: 'products/create', component: ProductCreatorComponent}, 
   {path: 'products/:id', component: ProductDetailsComponent, resolve: {product: ProductDetailsResolver}},
   {path: 'products/category/:category', component: HomePageComponent, resolve: {products: ProductListByCategoryResolver}},
   {path: 'transactions', component: TransactionsComponent, resolve: {transactions: TransactionListResolver}},

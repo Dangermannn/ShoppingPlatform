@@ -1,8 +1,8 @@
 ## Shopping platform
 
 Made with:
-	*Backend: ASP.NET CORE WebAPI 3.1.8  
-	*Frontend:angular v9
+	* Backend: ASP.NET CORE WebAPI 3.1.8  
+	* Frontend:angular v9
 
 #### Application allows:
 * adding/removing items for sell
@@ -16,5 +16,9 @@ Made with:
 ##### you need to run:
 * API: ``` dotnet run ```
 * Angular app:  ```ng serve```
+
+##### and have installed
+* MSSQL Server
+
 
 	

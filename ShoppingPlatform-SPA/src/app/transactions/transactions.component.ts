@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Transaction } from '../_models/transaction';
 import { AccountService } from '../_services/account.service';
 import { AlertifyService } from '../_services/alertify.service';
@@ -14,7 +14,7 @@ export class TransactionsComponent implements OnInit {
   transactions: Transaction[];
   currentUsername: string;
   constructor(private accountService: AccountService, private transactionService: TransactionService,
-     private route: ActivatedRoute, private alertify: AlertifyService) { }
+     private route: ActivatedRoute, private alertify: AlertifyService, private router: Router) { }
 
   ngOnInit(): void {
     this.route.data.subscribe(data => {
@@ -33,5 +33,9 @@ export class TransactionsComponent implements OnInit {
     }, error => {
       this.alertify.error('Error while removing a transaction');
     });
+  }
+
+  goToProductCreation(){
+    this.router.navigate(['products/create']);
   }
 }

@@ -28,8 +28,8 @@ export class ProductService {
     return this.http.get<Category[]>(this.baseUrl + 'products/categories');
   }
 
-  addProduct(product: Product){
-    return this.http.post<Product>(this.baseUrl + 'products', product);
+  addProduct(product: any){
+    return this.http.post<any>(this.baseUrl + 'products', product);
   }
 
   removeProduct(id: number){
