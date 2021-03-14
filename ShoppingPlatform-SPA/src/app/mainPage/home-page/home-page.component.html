@@ -1,8 +1,8 @@
-<div class="row">
-    <div class="col-2 text-center">
+<div class="row overflow-auto col">
+    <div class="col-lg-2 text-center">
         <app-categories (refreshProductEvent)="setCategory($event)"></app-categories>
     </div>
-    <div class="col-8">
+    <div class="col">
         <app-product-list [products]="products" ></app-product-list>
     </div>
 </div>
