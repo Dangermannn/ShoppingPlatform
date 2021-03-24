@@ -99,27 +99,17 @@ namespace ShoppingPlatform.API.Controllers
             return BadRequest();
         }
 
-        [HttpPut]
-        public async Task<ActionResult> UpdateProduct(ProductForCreationDto productForCreationDto)
+        [HttpPut("{id}")]
+        public async Task<ActionResult> UpdateProduct(int id, ProductForUpdate productForCreationDto)
         {
-            var category = await _productsRepository.GetCategory(productForCreationDto.CategoryName);
-            var seller = await _userRepository.GetUserByUsernameAsync(productForCreationDto.SellerName);
-            if (category == null || seller == null)
-                return BadRequest();
+            var product = await _productsRepository.GetProductByIdAsync(id);
 
-            var product = new Product
-            {
-                Title = productForCreationDto.Title,
-                Description = productForCreationDto.Description,
-                Category = category,
-                Price = productForCreationDto.Price,
-                Seller = seller
-            };
+            _mapper.Map(productForCreationDto, product);
 
-            _productsRepository.Update(product);
-            if (await _productsRepository.SaveAllAsync())
+            if(await _productsRepository.SaveAllAsync())
                 return Ok();
-            return BadRequest();
+
+            throw new System.Exception($"Updating product failed on save!");
         }
     }
 }
