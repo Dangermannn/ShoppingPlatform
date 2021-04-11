@@ -4,12 +4,6 @@ import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { User } from '../_models/user';
 
-const httpOptions = {
-  headers: new HttpHeaders({
-    Authorization: 'Bearer ' + JSON.parse(localStorage.getItem('user'))?.token
-  })
-}
-
 @Injectable({
   providedIn: 'root'
 })
@@ -19,14 +13,14 @@ export class UserService {
   constructor(private http: HttpClient) { }
 
   getMembers() {
-    return this.http.get<User[]>(this.baseUrl + 'users', httpOptions);
+    return this.http.get<User[]>(this.baseUrl + 'users');
   }
 
   getMember(name: string){
-    return this.http.get<User>(this.baseUrl + 'users/' + name, httpOptions);
+    return this.http.get<User>(this.baseUrl + 'users/' + name);
   }
 
   updateMember(user: User, name: string){
-    return this.http.put<User>(this.baseUrl + 'users/' + name, user, httpOptions);
+    return this.http.put<User>(this.baseUrl + 'users/' + name, user);
   }
 }

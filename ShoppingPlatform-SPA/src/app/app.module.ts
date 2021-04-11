@@ -1,6 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { HttpClientModule } from '@angular/common/http'
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http'
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { BsDropdownModule} from 'ngx-bootstrap/dropdown';
 import { CollapseModule } from 'ngx-bootstrap/collapse';
@@ -27,6 +27,7 @@ import { TransactionDetailsResolver } from './_resolvers/transaction-details.res
 import { ShoppingCartComponent } from './shopping-cart/shopping-cart.component';
 import { ShoppingCartResolver } from './_resolvers/shopping-cart.resolver';
 import { ProductCreatorComponent } from './product-creator/product-creator.component';
+import { TokenInterceptorService } from './_services/token-interceptor.service';
 
 @NgModule({   
   declarations: [
@@ -62,7 +63,12 @@ import { ProductCreatorComponent } from './product-creator/product-creator.compo
     UserEditResolver,
     TransactionListResolver,
     TransactionDetailsResolver,
-    ShoppingCartResolver
+    ShoppingCartResolver,
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: TokenInterceptorService,
+      multi: true
+    }
   ],
   bootstrap: [AppComponent]
 })
