@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { Subscription } from 'rxjs';
 import { Product } from '../_models/product';
+import { AlertifyService } from '../_services/alertify.service';
 import { ShoppingCartService } from '../_services/shopping-cart.service';
 
 @Component({
@@ -10,14 +12,20 @@ import { ShoppingCartService } from '../_services/shopping-cart.service';
 })
 export class ShoppingCartComponent implements OnInit {
   products: Product[];
-
-  constructor(private route: ActivatedRoute, private shoppingCartService: ShoppingCartService) { }
+  subscription: Subscription;
+  constructor(private alertify: AlertifyService, private route: ActivatedRoute, private shoppingCartService: ShoppingCartService) { }
 
   ngOnInit(): void {
     this.route.data.subscribe(data => {
       this.products = data['products'];
     });
 
-    this.products = this.shoppingCartService.getProducts();
+    //this.products = this.shoppingCartService.getProducts();
+  }
+
+  removeItemFromShoppingCart(index: number){
+    this.shoppingCartService.removeProduct(index);
+    //this.products.slice(index, 1);
+    this.alertify.error("REMOVED ITEMS: " + this.products.length + "INDEX: " + index);
   }
 }

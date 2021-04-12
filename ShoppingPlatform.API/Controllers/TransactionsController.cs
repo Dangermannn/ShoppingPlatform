@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using System.Transactions;
 using AutoMapper;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using ShoppingPlatform.API.Dtos;
 using ShoppingPlatform.API.Interfaces;
@@ -23,6 +24,7 @@ namespace ShoppingPlatform.API.Controllers
         }
 
         [HttpGet]
+        [Authorize]
         public async Task<ActionResult<IEnumerable<TransactionToReturnDto>>> GetTransactions()
         {
             var transactions = await _transactionRepository.GetTransactionsAsync();
@@ -32,6 +34,7 @@ namespace ShoppingPlatform.API.Controllers
         }
 
         [HttpGet("{name}")]
+        [Authorize]
         public async Task<ActionResult<IEnumerable<TransactionToReturnDto>>> GetAllUserTransactions(string name)
         {
             var transactions = await _transactionRepository.GetAllUserTransactionsAsync(name);
@@ -40,6 +43,7 @@ namespace ShoppingPlatform.API.Controllers
         }
 
         [HttpGet("{name}/bought")]
+        [Authorize]
         public async Task<ActionResult<IEnumerable<TransactionToReturnDto>>> GetTransactionsSoldBy(string name)
         {
             var transactions = await _transactionRepository.GetTransactionsByBuyerNameAsync(name);
@@ -49,6 +53,7 @@ namespace ShoppingPlatform.API.Controllers
         }
 
         [HttpGet("{name}/sold")]
+        [Authorize]
         public async Task<ActionResult<IEnumerable<TransactionToReturnDto>>> GetTransactionsBoughtBy(string name)
         {
             var transactions = await _transactionRepository.GetTransactionsBySellerNameAsync(name);
@@ -58,6 +63,7 @@ namespace ShoppingPlatform.API.Controllers
         }
 
         [HttpGet("{name}/{id}")]
+        [Authorize]
         public async Task<ActionResult<IEnumerable<TransactionToReturnDto>>> GetTransactionsDetails(int id)
         {
             var transaction = await _transactionRepository.GetTransactionByIdAsync(id);
@@ -67,6 +73,7 @@ namespace ShoppingPlatform.API.Controllers
         }
         
         [HttpPut("{name}/{id}")]
+        [Authorize]
         public async Task<ActionResult<Transaction>> UpdateTransactionVisibility(string name, int id)
         {
             var transaction = await _transactionRepository.GetTransactionByIdAsync(id);
