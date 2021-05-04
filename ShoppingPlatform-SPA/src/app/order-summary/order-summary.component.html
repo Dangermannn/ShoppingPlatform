@@ -1,0 +1,28 @@
+<div class="p-3 mt-5">
+    <table class="table table-striped">
+        <thead class="thead-dark align-middle">
+            <th scope="col">Title</th>
+            <th scope="col">Category name</th>
+            <th scope="col">Seller</th>  
+            <th scope="col">Price</th>  
+
+        <tbody>
+            <tr *ngFor="let product of products; let i = index">
+                <td>{{ product.title }}</td>
+                <td>{{ product.categoryName }}</td>
+                <td>{{ product.seller.username }}</td>
+                <td>{{ product.price }}</td>
+            </tr>
+        </tbody>
+    </table>
+    
+    <h1>Overall price: {{ overallPrice }}</h1>
+    
+    <div class="alert alert-danger" role="alert">
+        <span>CAUTION</span><br>Your account address will be provided to the seller.
+        If you want to change that go to account settings and modify it
+    </div>
+    
+    <button class="btn btn-primary float-right mr-5 mt-5"><i class="fa fa-shopping-bag mr-2"></i>Order</button> 
+
+</div>
