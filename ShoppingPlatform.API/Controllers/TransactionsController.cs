@@ -83,7 +83,6 @@ namespace ShoppingPlatform.API.Controllers
         [HttpPost]
         public async Task<ActionResult> AddTransaction(TransactionForCreationDto transactionForCreation)
         {        
-            var seller = await _userRepository.GetUserByIdAsync(transactionForCreation.SellerId);
             var buyer = await _userRepository.GetUserByIdAsync(transactionForCreation.BuyerId);
             
             var overallPrice = transactionForCreation.Products.Sum(p => p.Price);
@@ -93,14 +92,13 @@ namespace ShoppingPlatform.API.Controllers
             foreach(var item in listOfArchived)
             {
                 item.Category = await _productRepository.GetCategory(item.Category.Name);
-                item.Seller = seller;
+                item.Seller = await _userRepository.GetUserByUsernameAsync(item.Seller.Username);
                 item.Id = 0;
             }
             
             var transactionToPost = new Entities.Transaction
             {
                 Initialized = DateTime.Now,
-                Seller = seller,
                 Buyer = buyer,
                 Price = overallPrice,
                 Products = listOfArchived.ToList(),
@@ -112,10 +110,9 @@ namespace ShoppingPlatform.API.Controllers
             
             transactionForCreation.Products.ToList().ForEach(async x => {
                 var prod = await _productRepository.GetProductByIdAsync(x.Id);
-                _productRepository.DeleteProduct(prod);
+               // _productRepository.DeleteProduct(prod);
             });
             
-           // _productRepository.ArchiveProduct() // && await _productRepository.SaveAllAsync()
             if (await _transactionRepository.SaveAllAsync())
                 return Ok();
             throw new Exception("Failed while initializing transaction");

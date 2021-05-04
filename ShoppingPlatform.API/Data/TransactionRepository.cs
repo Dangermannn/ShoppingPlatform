@@ -38,12 +38,12 @@ namespace ShoppingPlatform.API.Data
 
         public async Task<IEnumerable<Transaction>> GetTransactionsAsync()
         {
-            return await _context.Transactions.Include(t => t.Seller).Include(t => t.Buyer).Include(t => t.Products).ToListAsync();
+            return await _context.Transactions.Include(t => t.Buyer).Include(t => t.Products).ToListAsync();
         }
 
         public async Task<Transaction> GetTransactionByIdAsync(int id)
         {
-            return await _context.Transactions.Include(t => t.Seller).Include(t => t.Buyer).Include(t => t.Products).FirstOrDefaultAsync(t => t.Id == id);
+            return await _context.Transactions.Include(t => t.Buyer).Include(t => t.Products).FirstOrDefaultAsync(t => t.Id == id);
         }
 
         public async Task<bool> SaveAllAsync()
@@ -53,19 +53,20 @@ namespace ShoppingPlatform.API.Data
 
         public async Task<IEnumerable<Transaction>> GetAllUserTransactionsAsync(string name)
         {
-            return await _context.Transactions.Include(t => t.Seller).Include(t => t.Buyer).Include(t => t.Products)
-                .Where(t => (t.Seller.Username == name && t.IsVisibleBySeller) || (t.Buyer.Username == name && t.IsVisibleByBuyer)).ToListAsync();
+            return await _context.Transactions.Include(t => t.Buyer).Include(t => t.Products)
+                .Where(t => (t.Buyer.Username == name && t.IsVisibleByBuyer)).ToListAsync();
         }
 
+        
         public async Task<IEnumerable<Transaction>> GetTransactionsBySellerNameAsync(string name)
         {
-            return await _context.Transactions.Include(t => t.Seller).Include(t => t.Buyer).Include(t => t.Products)
-                .Where(t => t.Seller.Username == name).ToListAsync();
+            return await _context.Transactions.Include(t => t.Buyer).Include(t => t.Products)
+                .Where(t => t.Buyer.Username == name).ToListAsync();
         }
-
+        
         public async Task<IEnumerable<Transaction>> GetTransactionsByBuyerNameAsync(string name)
         {
-            return await _context.Transactions.Include(t => t.Seller).Include(t => t.Buyer).Include(t => t.Products)
+            return await _context.Transactions.Include(t => t.Buyer).Include(t => t.Products)
                 .Where(t => t.Buyer.Username == name).ToListAsync();
         }
     }

@@ -8,7 +8,6 @@ namespace ShoppingPlatform.API.Dtos
     {
         public int Id { get; set; }
         public DateTime Initialized { get; set; }
-        public UserToReturnDto Seller { get; set; }
         public UserToReturnDto Buyer { get; set; }
         public decimal Price { get; set; }
         public ICollection<ArchivedProductToReturnDto> Products { get; set; }

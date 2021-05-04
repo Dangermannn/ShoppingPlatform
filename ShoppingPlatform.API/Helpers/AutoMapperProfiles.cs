@@ -21,7 +21,6 @@ namespace ShoppingPlatform.API.Helpers
             CreateMap<User, UserForUpdateDto>().ReverseMap();
             CreateMap<Transaction, TransactionDto>()
                 .ForMember(dest => dest.Buyer, opt => opt.MapFrom(src => src.Buyer))
-                .ForMember(dest => dest.Seller, opt => opt.MapFrom(src => src.Seller))
                 .ReverseMap();
             CreateMap<ArchivedProduct, ArchivedProductToReturnDto>();
             CreateMap<TransactionForCreationDto, Transaction>()
@@ -32,7 +31,9 @@ namespace ShoppingPlatform.API.Helpers
                 .ForMember(dest => dest.Category.Name, opt => opt.MapFrom(src => src.CategoryName));
                 */
             CreateMap<ArchivedProduct, ProductToReturnDto>()
-                .ForMember(src => src.Id, opt => opt.Ignore()).ReverseMap();
+                .ForMember(src => src.Id, opt => opt.Ignore())
+                .ForMember(src => src.Seller, opt => opt.MapFrom(src => src.Seller))
+                .ReverseMap();
         }
     }
 }
