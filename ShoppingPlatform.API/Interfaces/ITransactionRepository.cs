@@ -6,6 +6,8 @@ namespace ShoppingPlatform.API.Interfaces
 {
     public interface ITransactionRepository
     {
+        void AddTransaction(Transaction transaction);
+        void RemoveTransaction(Transaction transaction);
         Task<Transaction> GetTransactionByIdAsync(int id);
         Task<IEnumerable<Transaction>> GetTransactionsAsync();
         Task<IEnumerable<Transaction>> GetAllUserTransactionsAsync(string name);

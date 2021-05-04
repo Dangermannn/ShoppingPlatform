@@ -15,6 +15,27 @@ namespace ShoppingPlatform.API.Data
             _context = context;
         }
 
+        public void AddTransaction(Transaction transaction)
+        {
+            //_context.Entry(transaction.Buyer).State = EntityState.Unchanged;
+            //_context.Entry(transaction.Seller).State = EntityState.Unchanged;
+            _context.Entry(transaction).State = EntityState.Unchanged;
+            foreach(var product in transaction.Products)
+            {
+                _context.Entry(product).State = EntityState.Unchanged;
+                
+                _context.ArchivedProduct.Add(product);
+            }
+            
+            //_context.ArchivedProduct.Attach();
+            _context.Add(transaction);
+        }
+
+        public void RemoveTransaction(Transaction transaction)
+        {
+            _context.Remove(transaction);
+        }
+
         public async Task<IEnumerable<Transaction>> GetTransactionsAsync()
         {
             return await _context.Transactions.Include(t => t.Seller).Include(t => t.Buyer).Include(t => t.Products).ToListAsync();

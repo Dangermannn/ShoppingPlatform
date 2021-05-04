@@ -4,7 +4,7 @@ using ShoppingPlatform.API.Entities;
 
 namespace ShoppingPlatform.API.Dtos
 {
-    public class TransactionToReturnDto
+    public class TransactionDto
     {
         public int Id { get; set; }
         public DateTime Initialized { get; set; }
