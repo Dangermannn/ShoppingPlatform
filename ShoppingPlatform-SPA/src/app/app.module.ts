@@ -28,6 +28,7 @@ import { ShoppingCartComponent } from './shopping-cart/shopping-cart.component';
 import { ShoppingCartResolver } from './_resolvers/shopping-cart.resolver';
 import { ProductCreatorComponent } from './product-creator/product-creator.component';
 import { TokenInterceptorService } from './_services/token-interceptor.service';
+import { OrderSummaryComponent } from './order-summary/order-summary.component';
 
 @NgModule({   
   declarations: [
@@ -43,7 +44,8 @@ import { TokenInterceptorService } from './_services/token-interceptor.service';
     TransactionsComponent,
     TransactionsDetailsComponent,
     ShoppingCartComponent,
-    ProductCreatorComponent
+    ProductCreatorComponent,
+    OrderSummaryComponent
   ],
   imports: [
     BrowserModule,  

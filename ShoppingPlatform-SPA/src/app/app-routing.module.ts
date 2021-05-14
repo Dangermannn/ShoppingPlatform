@@ -4,6 +4,7 @@ import { AccountSettingsComponent } from './account-settings/account-settings.co
 import { AppComponent } from './app.component';
 import { HomePageComponent } from './mainPage/home-page/home-page.component';
 import { ProductDetailsComponent } from './mainPage/product-details/product-details.component';
+import { OrderSummaryComponent } from './order-summary/order-summary.component';
 import { ProductCreatorComponent } from './product-creator/product-creator.component';
 import { RegistrationComponent } from './registration/registration.component';
 import { ShoppingCartComponent } from './shopping-cart/shopping-cart.component';
@@ -27,6 +28,7 @@ const routes: Routes = [
   {path: 'products/create', component: ProductCreatorComponent}, 
   {path: 'products/:id', component: ProductDetailsComponent, resolve: {product: ProductDetailsResolver}},
   {path: 'products/category/:category', component: HomePageComponent, resolve: {products: ProductListByCategoryResolver}},
+  {path: 'order-summary', component: OrderSummaryComponent, resolve: {products: ShoppingCartResolver}},
   {path: 'transactions', component: TransactionsComponent, resolve: {transactions: TransactionListResolver}},
   {path: '**', component: AppComponent, pathMatch: 'full'},
 ];
