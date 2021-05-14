@@ -31,33 +31,37 @@ export class ProductCreatorComponent implements OnInit {
     this.createProductForm();
   }
 
-  addProduct(){
-    var decodedToken = this.accountService.getDecodedToken(localStorage.getItem('user'));
-    this.productModel.sellerName = decodedToken.nameid;
-    this.alertify.confirm(JSON.stringify(this.productModel), () => {});
+  addProduct(): void{
+    let decodedToken = this.accountService.getDecodedToken(localStorage.getItem('user'));
+    this.productModel = Object.assign({}, this.productForm.value);
     var obj = {
       "title": this.productModel.title,
       "description": this.productModel.description,
       "categoryName": this.productModel.categoryName,
       "city":this.productModel.city,
       "price": +this.productModel.price,
-      "sellerName": this.productModel.sellerName
+      "sellerName": decodedToken.unique_name
   };
     this.productService.addProduct(obj).subscribe(data => {
       this.alertify.success("Product has been added successfully!");
-      this.router.navigate(['users/transactions/' + decodedToken.nameid]);
+      this.router.navigate(['users/transactions/' + decodedToken.unique_name]);
     }, error => {
       this.alertify.error(error);
     });
   }
 
-  createProductForm(){
+  createProductForm(): void{
     this.productForm = this.fb.group({
-      title: [''],
-      categoryName: [''],
-      description: [''],
-      city: [''],
-      price: ['']
-    });
+      title: ['', Validators.required],
+      categoryName: ['', Validators.required],
+      description: ['', Validators.required],
+      city: ['', Validators.required],
+      price: ['', Validators.required]
+    }, {validators: this.isNumberValidator});
+  }
+
+  isNumberValidator(fg: FormGroup){
+    //return fg.get('price').value === fg.get('title').value ? null : {'not-number': true};
+    return !isNaN(Number(fg.get("price").value)) ? null : {'not-number': true};
   }
 }

@@ -23,7 +23,7 @@
                 
                 <div class="form-group">
                         <select formControlName="categoryName" name="categoryName" id="category" class="form-control">
-                            <option *ngFor="let category of categories"
+                            <option *ngFor="let category of categories;"
                                     [hidden]="category.hasChild" 
                                     [value]="category.name"
                                     >{{ category.name }}</option>
@@ -41,7 +41,7 @@
                               ></textarea>
                         <div class="invalid-feedback"
                              *ngIf="productForm.get('description').hasError('required') && productForm.get('description').touched">
-                             Description is required is required
+                             Description is required
                         </div>
                 </div>
 
@@ -56,7 +56,7 @@
                            > 
                     <div class="invalid-feedback"
                          *ngIf="productForm.get('city').hasError('required') && productForm.get('city').touched">
-                         Description is required is required
+                         City is required
                     </div>
                 </div>
 
@@ -67,11 +67,15 @@
                            type="text"
                            placeholder="price"
                            formControlName="price"
-                           [ngClass]="{'is-invalid': productForm.get('price').errors && productForm.get('price').touched}"
+                           [ngClass]="{'is-invalid': productForm.get('price').errors && productForm.get('price').touched || productForm.hasError('not-number')}"
                            > 
                     <div class="invalid-feedback"
-                         *ngIf="productForm.get('city').hasError('required') && productForm.get('city').touched">
-                         Description is required is required
+                         *ngIf="productForm.get('price').hasError('required') && productForm.get('price').touched">
+                         Price is required
+                    </div>
+                    <div class="invalid-feedback"
+                        *ngIf="productForm.hasError('not-number')">
+                        Price is not a number
                     </div>
                 </div>
                 <div class="form-group">
