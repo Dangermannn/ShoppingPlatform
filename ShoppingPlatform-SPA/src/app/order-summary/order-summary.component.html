@@ -15,7 +15,7 @@
             </tr>
         </tbody>
     </table>
-    
+
     <h1>Overall price: {{ overallPrice }}</h1>
     
     <div class="alert alert-danger" role="alert">
@@ -23,6 +23,6 @@
         If you want to change that go to account settings and modify it
     </div>
     
-    <button class="btn btn-primary float-right mr-5 mt-5"><i class="fa fa-shopping-bag mr-2"></i>Order</button> 
+    <button (click)="processTransaction()" class="btn btn-primary float-right mr-5 mt-5"><i class="fa fa-shopping-bag mr-2"></i>Order</button> 
 
 </div>

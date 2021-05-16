@@ -1,6 +1,7 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
+import { TransactionPostDto } from '../_dtos/transactionPostDto';
 import { Transaction } from '../_models/transaction';
 
 @Injectable({
@@ -33,5 +34,9 @@ export class TransactionService {
 
   updateTransaction(id: number, name: string){
     return this.http.put<Transaction>(this.baseUrl + 'transactions/' + name + '/' + id, {});
+  }
+
+  postTransaction(transaction: TransactionPostDto){
+    return this.http.post<TransactionPostDto>(this.baseUrl + 'transactions', transaction);
   }
 }
