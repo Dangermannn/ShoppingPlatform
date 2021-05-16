@@ -101,17 +101,18 @@ namespace ShoppingPlatform.API.Controllers
                 Initialized = DateTime.Now,
                 Buyer = buyer,
                 Price = overallPrice,
-                Products = listOfArchived.ToList(),
+                Products = listOfArchived,
                 IsVisibleByBuyer = true,
                 IsVisibleBySeller = true
             };
 
             _transactionRepository.AddTransaction(transactionToPost);
-            
-            transactionForCreation.Products.ToList().ForEach(async x => {
-                var prod = await _productRepository.GetProductByIdAsync(x.Id);
-               // _productRepository.DeleteProduct(prod);
-            });
+
+            foreach(var item in transactionForCreation.Products)
+            {
+                var prod = await _productRepository.GetProductByIdAsync(item.Id);
+                //_productRepository.DeleteProduct(prod);
+            }
             
             if (await _transactionRepository.SaveAllAsync())
                 return Ok();

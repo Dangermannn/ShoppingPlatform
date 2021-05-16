@@ -22,7 +22,6 @@ namespace ShoppingPlatform.API.Data
             _context.Entry(transaction).State = EntityState.Unchanged;
             foreach(var product in transaction.Products)
             {
-                _context.Entry(product).State = EntityState.Unchanged;
                 
                 _context.ArchivedProduct.Add(product);
             }
