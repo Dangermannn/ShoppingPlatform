@@ -39,4 +39,12 @@ export class ProductService {
   updateProduct(product: Product){
     return this.http.put<Product>(this.baseUrl + 'products', product);
   }
+
+  getArchivedProduct(id: number){
+    return this.http.get<Product>(this.baseUrl + 'products/archive/' + id);
+  }
+
+  getArchivedProducts(){
+    return this.http.get<Product[]>(this.baseUrl + 'products/archive');
+  }
 }

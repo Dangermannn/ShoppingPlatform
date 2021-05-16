@@ -1,0 +1,66 @@
+<div class="container">
+    <div class="row m-5">
+        <div class="col-sm-5 justify-content-center align-items-center">
+            <img
+            class="img-fluid img-thumbnail"
+            src="{{'../../../../../assets/default_card_image.png' }}"
+            alt="TEXT"
+            />   
+        </div>
+        <div class="col">
+            <div class="card-body">
+                <h2><strong>{{ product.title }}</strong></h2>
+                <div>
+                    <strong>Category</strong>
+                    <p>{{ product.categoryName }}</p>
+                </div>
+                <div>
+                    <strong>Seller</strong>
+                    <p>{{ product.seller.username | titlecase }}</p>
+                </div>
+                <div>
+                    <strong>Annoucement added</strong>
+                    <p>{{ product.addedDate | date: 'short' }}</p>
+                </div>
+                <div>
+                    <strong>Price</strong>
+                    <h2>${{ product.price}}</h2>
+                </div>                                 
+                <div class="alert alert-warning" role="alert">
+                    Archive
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row m-5">
+        <div class="tab-panel">
+            <tabset class="member-tabset" #memberTabset>
+                <tab heading="Description">
+                    <br>
+                    <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Quod natus earum laborum, magnam dolore optio reiciendis necessitatibus harum qui enim itaque facere rerum eius ipsam voluptatibus id. Cumque delectus consequatur id fuga iste laboriosam magnam ea tempore accusantium quia tenetur voluptatum quas distinctio, officiis soluta, asperiores corrupti, ut dolorum dicta? Dolore facere deserunt accusantium hic. Incidunt deserunt nisi, non possimus aliquam quas animi esse tempore earum, error quidem dolores, rem eligendi saepe quibusdam! Laboriosam officiis, totam aliquam qui iste odit ab tempore, voluptatibus nulla nesciunt ad fuga labore? Quis voluptate amet nam perspiciatis odio dolorum repudiandae tenetur porro fugit fuga unde incidunt natus ducimus veniam, ipsum molestias ipsam quibusdam nihil deserunt harum! Delectus ex laudantium veniam nam, nesciunt nobis quod?</p>            
+                </tab>
+                <tab heading="More about seller">
+                    <strong>Seller:</strong>
+                    <br>
+                    <p>{{ product.seller.username | titlecase }}</p>
+
+                    <strong>Gender:</strong>
+                    <br>
+                    <p>{{ product.seller.gender | titlecase }}</p>
+
+                    <strong>City:</strong>
+                    <br>
+                    <p>{{ product.seller.city | titlecase }}</p>
+
+                    <strong>Address:</strong>
+                    <br>
+                    <p>{{ product.seller.fullAddress | titlecase }}</p>
+
+                    <strong>Description:</strong>
+                    <br>
+                    <p>{{ product.seller.description | titlecase }}</p>
+                </tab>
+            </tabset>
+        </div>
+    </div>
+</div>

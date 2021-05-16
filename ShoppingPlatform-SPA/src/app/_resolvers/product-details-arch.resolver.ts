@@ -8,12 +8,12 @@ import { AlertifyService } from '../_services/alertify.service';
 import { ProductService } from '../_services/product.service';
 
 @Injectable()
-export class ProductDetailsResolver implements Resolve<Product>{
+export class ProductDetailsArchResolver implements Resolve<Product>{
 
     constructor(private productService: ProductService, private router: Router, private alertify: AlertifyService) {}
 
     resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<Product>  {
-        return this.productService.getProduct(route.params['id']).pipe(
+        return this.productService.getArchivedProduct(route.params['id']).pipe(
             catchError(error => {
                 this.alertify.error('Problem retrieving data');
                 this.router.navigate(['/']);

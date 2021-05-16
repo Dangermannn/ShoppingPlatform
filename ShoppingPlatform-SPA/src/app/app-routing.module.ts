@@ -3,6 +3,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { AccountSettingsComponent } from './account-settings/account-settings.component';
 import { AppComponent } from './app.component';
 import { HomePageComponent } from './mainPage/home-page/home-page.component';
+import { ProductDetailsArchComponent } from './mainPage/product-details-arch/product-details-arch.component';
 import { ProductDetailsComponent } from './mainPage/product-details/product-details.component';
 import { OrderSummaryComponent } from './order-summary/order-summary.component';
 import { ProductCreatorComponent } from './product-creator/product-creator.component';
@@ -10,6 +11,7 @@ import { RegistrationComponent } from './registration/registration.component';
 import { ShoppingCartComponent } from './shopping-cart/shopping-cart.component';
 import { TransactionsDetailsComponent } from './transactions-details/transactions-details.component';
 import { TransactionsComponent } from './transactions/transactions.component';
+import { ProductDetailsArchResolver } from './_resolvers/product-details-arch.resolver';
 import { ProductDetailsResolver } from './_resolvers/product-details.resolver';
 import { ProductListByCategoryResolver } from './_resolvers/product-list-by-category.resolver';
 import { ShoppingCartResolver } from './_resolvers/shopping-cart.resolver';
@@ -30,6 +32,7 @@ const routes: Routes = [
   {path: 'products/category/:category', component: HomePageComponent, resolve: {products: ProductListByCategoryResolver}},
   {path: 'order-summary', component: OrderSummaryComponent, resolve: {products: ShoppingCartResolver}},
   {path: 'transactions', component: TransactionsComponent, resolve: {transactions: TransactionListResolver}},
+  {path: 'products/archive/:id', component: ProductDetailsArchComponent, resolve: {product: ProductDetailsArchResolver}},
   {path: '**', component: AppComponent, pathMatch: 'full'},
 ];
 

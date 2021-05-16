@@ -24,6 +24,24 @@ namespace ShoppingPlatform.API.Controllers
             _productsRepository = productsRepository;
         }
 
+        [HttpGet("archive")]
+        public async Task<ActionResult<IEnumerable<ProductToReturnDto>>> GetArchivedProducts()
+        {
+            var products = await _productsRepository.GetArchivedProductsAsync();
+
+            var productsToReturn = _mapper.Map<IEnumerable<ProductToReturnDto>>(products);
+            return Ok(productsToReturn);
+        }
+
+        [HttpGet("archive/{id}")]
+        public async Task<ActionResult<IEnumerable<ProductToReturnDto>>> GetArchivedProductById(int id)
+        {
+            var product = await _productsRepository.GetArchivedProductByIdAsync(id);
+
+            var productToReturn = _mapper.Map<ProductToReturnDto>(product);
+            return Ok(productToReturn);
+        }
+
         [HttpGet]
         public async Task<ActionResult<IEnumerable<ProductToReturnDto>>> GetProducts()
         {

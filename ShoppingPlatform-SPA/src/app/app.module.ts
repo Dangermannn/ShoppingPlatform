@@ -29,6 +29,8 @@ import { ShoppingCartResolver } from './_resolvers/shopping-cart.resolver';
 import { ProductCreatorComponent } from './product-creator/product-creator.component';
 import { TokenInterceptorService } from './_services/token-interceptor.service';
 import { OrderSummaryComponent } from './order-summary/order-summary.component';
+import { ProductDetailsArchComponent } from './mainPage/product-details-arch/product-details-arch.component';
+import { ProductDetailsArchResolver } from './_resolvers/product-details-arch.resolver';
 
 @NgModule({   
   declarations: [
@@ -45,7 +47,8 @@ import { OrderSummaryComponent } from './order-summary/order-summary.component';
     TransactionsDetailsComponent,
     ShoppingCartComponent,
     ProductCreatorComponent,
-    OrderSummaryComponent
+    OrderSummaryComponent,
+    ProductDetailsArchComponent
   ],
   imports: [
     BrowserModule,  
@@ -66,6 +69,7 @@ import { OrderSummaryComponent } from './order-summary/order-summary.component';
     TransactionListResolver,
     TransactionDetailsResolver,
     ShoppingCartResolver,
+    ProductDetailsArchResolver,
     {
       provide: HTTP_INTERCEPTORS,
       useClass: TokenInterceptorService,

@@ -6,6 +6,8 @@ namespace ShoppingPlatform.API.Interfaces
 {
     public interface IProductsRepository
     {
+        Task<ArchivedProduct> GetArchivedProductByIdAsync(int id);
+        Task<IEnumerable<ArchivedProduct>> GetArchivedProductsAsync();
         Task<Product> GetProductByIdAsync(int id);
         Task<IEnumerable<Product>> GetProductsAsync();
         Task<IEnumerable<Product>> GetProductsByCategoryAsync(string category);

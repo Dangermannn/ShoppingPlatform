@@ -24,6 +24,15 @@ namespace ShoppingPlatform.API.Data
             _context.Remove(product);
         }
 
+        public async Task<ArchivedProduct> GetArchivedProductByIdAsync(int id)
+        {
+            return await _context.ArchivedProduct.Include(p => p.Category).Include(p => p.Seller).FirstOrDefaultAsync(p => p.Id == id);
+        }
+        public async Task<IEnumerable<ArchivedProduct>> GetArchivedProductsAsync()
+        {
+            return await _context.ArchivedProduct.Include(p => p.Category).Include(p => p.Seller).ToListAsync();
+        }
+
         public async Task<Product> GetProductByIdAsync(int id)
         {
             return await _context.Products.Include(p => p.Category).Include(p => p.Seller).FirstOrDefaultAsync(p => p.Id == id);
