@@ -29,34 +29,35 @@ namespace ShoppingPlatform.API.Controllers
         public async Task<ActionResult<IEnumerable<User>>> GetUsers()
         {
             var users = await _userRepository.GetUsersAsync();
-            var usersToReturn = _mapper.Map<IEnumerable<UserToReturnDto>>(users);
-            return Ok(usersToReturn);
-        }
-        /*
-        [Authorize]
-        [HttpGet("{id}")]
-        public async Task<ActionResult<User>> GetUser(int id)
-        {
-            return await _userRepository.GetUserByIdAsync(id);
-        }
-        */
 
+            if(users == null)
+                return NoContent();
+
+            return Ok( _mapper.Map<IEnumerable<UserToReturnDto>>(users));
+        }
 
         [Authorize]
         [HttpGet("{username}")]
         public async Task<ActionResult<User>> GetUser(string username)
         {
             var user = await _userRepository.GetUserByUsernameAsync(username);
-            var userToReturn = _mapper.Map<UserToReturnDto>(user);
 
-            return Ok(userToReturn);
+            if(user == null)
+                return NoContent();
+
+            return Ok(_mapper.Map<UserToReturnDto>(user));
         }
 
         [HttpPut("{username}")]
         public async Task<ActionResult> UpdateUser(string username, UserForUpdateDto userForUpdateDto)
         {
             var user = await _userRepository.GetUserByUsernameAsync(username);
+
+            if(user == null)
+                return BadRequest("There's no user with that username");
+
             _mapper.Map(userForUpdateDto, user);
+            
             if(await _userRepository.SaveAllAsync())
                 return NoContent();
 

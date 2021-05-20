@@ -7,6 +7,7 @@ using ShoppingPlatform.API.Interfaces;
 using ShoppingPlatform.API.Entities;
 using AutoMapper;
 using ShoppingPlatform.API.Dtos;
+using System;
 
 namespace ShoppingPlatform.API.Controllers
 {
@@ -29,8 +30,10 @@ namespace ShoppingPlatform.API.Controllers
         {
             var products = await _productsRepository.GetArchivedProductsAsync();
 
-            var productsToReturn = _mapper.Map<IEnumerable<ProductToReturnDto>>(products);
-            return Ok(productsToReturn);
+            if(products == null)
+                return NoContent();
+
+            return Ok(_mapper.Map<IEnumerable<ProductToReturnDto>>(products));
         }
 
         [HttpGet("archive/{id}")]
@@ -38,8 +41,10 @@ namespace ShoppingPlatform.API.Controllers
         {
             var product = await _productsRepository.GetArchivedProductByIdAsync(id);
 
-            var productToReturn = _mapper.Map<ProductToReturnDto>(product);
-            return Ok(productToReturn);
+            if(product == null)
+                return NoContent();
+
+            return Ok( _mapper.Map<ProductToReturnDto>(product));
         }
 
         [HttpGet]
@@ -47,8 +52,10 @@ namespace ShoppingPlatform.API.Controllers
         {
             var products = await _productsRepository.GetProductsAsync();
 
-            var productsToReturn = _mapper.Map<IEnumerable<ProductToReturnDto>>(products);
-            return Ok(productsToReturn);
+            if(products == null)
+                return NoContent();
+
+            return Ok(_mapper.Map<IEnumerable<ProductToReturnDto>>(products));
         }
 
         [HttpGet("category/{category}")]
@@ -56,26 +63,32 @@ namespace ShoppingPlatform.API.Controllers
         {
             var products = await _productsRepository.GetProductsByCategoryAsync(category);
 
-            var productsToReturn = _mapper.Map<IEnumerable<ProductToReturnDto>>(products);
-            return Ok(productsToReturn);
+            if(products == null)
+                return NoContent();
+
+            return Ok(_mapper.Map<IEnumerable<ProductToReturnDto>>(products));
         }
 
         [HttpGet("{id}")]
         public async Task<ActionResult<ProductToReturnDto>> GetProduct(int id)
         {
             var product = await _productsRepository.GetProductByIdAsync(id);
-            var productToReturn = _mapper.Map<ProductToReturnDto>(product);
 
-            return productToReturn;
+            if(product == null)
+                return NoContent();
+            
+            return Ok(_mapper.Map<ProductToReturnDto>(product));
         }
 
         [HttpGet("categories")]
         public async Task<ActionResult<IEnumerable<CategoryToReturnDto>>> GetCategories()
         {
             var categories = await _productsRepository.GetCategories();
-            var categoriesToReturn = _mapper.Map<IEnumerable<CategoryToReturnDto>>(categories);
 
-            return Ok(categoriesToReturn);
+            if(categories == null)
+                return NoContent();
+
+            return Ok( _mapper.Map<IEnumerable<CategoryToReturnDto>>(categories));
         }
 
         [HttpDelete("{id}")]
@@ -83,15 +96,14 @@ namespace ShoppingPlatform.API.Controllers
         {
             var product = await _productsRepository.GetProductByIdAsync(id);
             if (product == null)
-                return BadRequest();
+                return BadRequest("Invalid product id");
 
-            if (product != null)
-                _productsRepository.DeleteProduct(product);
+             _productsRepository.DeleteProduct(product);
 
             if (await _productsRepository.SaveAllAsync())
                 return Ok();
 
-            return BadRequest("Failed to delete product");
+            throw new Exception("Failed to remove product");
         }
 
         [HttpPost]
@@ -112,9 +124,10 @@ namespace ShoppingPlatform.API.Controllers
             };
 
             _productsRepository.AddProduct(product);
+
             if (await _productsRepository.SaveAllAsync())
-                return Ok();
-            return BadRequest();
+                return CreatedAtAction(nameof(GetProduct), new {id = product.Id}, _mapper.Map<ProductToReturnDto>(product));
+            throw new Exception("Failed to add product");
         }
 
         [HttpPut("{id}")]
@@ -122,10 +135,13 @@ namespace ShoppingPlatform.API.Controllers
         {
             var product = await _productsRepository.GetProductByIdAsync(id);
 
+            if(product == null)
+                return BadRequest("Invalid product id");
+
             _mapper.Map(productForCreationDto, product);
 
             if(await _productsRepository.SaveAllAsync())
-                return Ok();
+                return NoContent();
 
             throw new System.Exception($"Updating product failed on save!");
         }
