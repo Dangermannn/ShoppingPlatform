@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { AccountSettingsComponent } from './account-settings/account-settings.component';
+import { AdminPanelComponent } from './admin/admin-panel/admin-panel.component';
 import { AppComponent } from './app.component';
 import { HomePageComponent } from './mainPage/home-page/home-page.component';
 import { ProductDetailsArchComponent } from './mainPage/product-details-arch/product-details-arch.component';
@@ -11,6 +12,7 @@ import { RegistrationComponent } from './registration/registration.component';
 import { ShoppingCartComponent } from './shopping-cart/shopping-cart.component';
 import { TransactionsDetailsComponent } from './transactions-details/transactions-details.component';
 import { TransactionsComponent } from './transactions/transactions.component';
+import { AdminGuard } from './_guards/admin.guard';
 import { AuthGuard } from './_guards/auth.guard';
 import { ProductDetailsArchResolver } from './_resolvers/product-details-arch.resolver';
 import { ProductDetailsResolver } from './_resolvers/product-details.resolver';
@@ -34,7 +36,8 @@ const routes: Routes = [
       {path: 'users/transactions/:name/:id', component: TransactionsDetailsComponent, resolve: {transaction: TransactionDetailsResolver}},
       {path: 'products/create', component: ProductCreatorComponent}, 
       {path: 'transactions', component: TransactionsComponent, resolve: {transactions: TransactionListResolver}},
-      {path: 'order-summary', component: OrderSummaryComponent, resolve: {products: ShoppingCartResolver}}
+      {path: 'order-summary', component: OrderSummaryComponent, resolve: {products: ShoppingCartResolver}},
+      {path: 'admin-panel', component: AdminPanelComponent, canActivate: [AdminGuard]}
     ]
   },
   {path: 'register', component: RegistrationComponent},

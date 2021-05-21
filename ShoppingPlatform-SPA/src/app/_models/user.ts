@@ -6,4 +6,5 @@ export interface User{
     city: string;
     fullAddress: string;
     token: string;
+    roles: string[];
 }
