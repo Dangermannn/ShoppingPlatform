@@ -10,8 +10,17 @@ namespace ShoppingPlatform.API.Data
         public DbSet<Product> Products { get; set; }
         public DbSet<Transaction> Transactions { get; set; }
         public DbSet<ArchivedProduct> ArchivedProduct { get; set; }
+        public DbSet<Role> Roles { get; set; }
         public DataContext(DbContextOptions options) : base(options)
         {
+        }
+
+        protected override void OnModelCreating(ModelBuilder builder)
+        {
+            base.OnModelCreating(builder);
+
+            builder.Entity<UserRole>()
+                .HasKey(r => new { r.RoleId, r.UserId});
         }
     }
 }
