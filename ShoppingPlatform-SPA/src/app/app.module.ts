@@ -31,6 +31,7 @@ import { TokenInterceptorService } from './_services/token-interceptor.service';
 import { OrderSummaryComponent } from './order-summary/order-summary.component';
 import { ProductDetailsArchComponent } from './mainPage/product-details-arch/product-details-arch.component';
 import { ProductDetailsArchResolver } from './_resolvers/product-details-arch.resolver';
+import { AdminPanelComponent } from './admin/admin-panel/admin-panel.component';
 
 @NgModule({   
   declarations: [
@@ -49,6 +50,7 @@ import { ProductDetailsArchResolver } from './_resolvers/product-details-arch.re
     ProductCreatorComponent,
     OrderSummaryComponent,
     ProductDetailsArchComponent,
+    AdminPanelComponent
   ],
   imports: [
     BrowserModule,  
