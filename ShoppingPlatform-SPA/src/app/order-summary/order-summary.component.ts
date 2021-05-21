@@ -5,6 +5,7 @@ import { Product } from '../_models/product';
 import { Transaction } from '../_models/transaction';
 import { AccountService } from '../_services/account.service';
 import { AlertifyService } from '../_services/alertify.service';
+import { ShoppingCartService } from '../_services/shopping-cart.service';
 import { TransactionService } from '../_services/transaction.service';
 
 @Component({
@@ -17,7 +18,7 @@ export class OrderSummaryComponent implements OnInit {
   overallPrice: number = 0;
   constructor(private route: ActivatedRoute, private accountService: AccountService,
     private transactionService: TransactionService, private alertify: AlertifyService,
-    private router: Router) { }
+    private shoppingCartService: ShoppingCartService, private router: Router) { }
 
   ngOnInit(): void {
     this.route.data.subscribe(data => {
@@ -30,17 +31,16 @@ export class OrderSummaryComponent implements OnInit {
   }
 
   processTransaction(): void{
-    //this.alertify.confirm(JSON.stringify(this.products), () => {});
     const decodedToken = this.accountService.getDecodedToken(localStorage.getItem('user'));
     
     const transaction: TransactionPostDto = {
       "buyerId": +decodedToken.nameid,
       "products": this.products
     }
-    console.log(JSON.stringify(transaction));
+
     this.transactionService.postTransaction(transaction).subscribe(data => {
-      console.log(data);
       this.alertify.success("Transaction has been initialized");
+      this.shoppingCartService.clearShoppingCart();
       this.router.navigate(['users/transactions/' + decodedToken.unique_name]);
     }, error => {
       this.alertify.error(error);

@@ -36,9 +36,11 @@ namespace ShoppingPlatform.API.Controllers
         public async Task<ActionResult<IEnumerable<TransactionDto>>> GetTransactions()
         {
             var transactions = await _transactionRepository.GetTransactionsAsync();
+
+            if(transactions == null)
+                return NoContent();
             
-            var transactionsToReturn = _mapper.Map<IEnumerable<TransactionDto>>(transactions);
-            return Ok(transactionsToReturn);
+            return Ok(_mapper.Map<IEnumerable<TransactionDto>>(transactions));
         }
 
         [HttpGet("{name}")]
@@ -46,8 +48,11 @@ namespace ShoppingPlatform.API.Controllers
         public async Task<ActionResult<IEnumerable<TransactionDto>>> GetAllUserTransactions(string name)
         {
             var transactions = await _transactionRepository.GetAllUserTransactionsAsync(name);
-            var transactionsToReturn = _mapper.Map<IEnumerable<TransactionDto>>(transactions);
-            return Ok(transactionsToReturn);
+
+            if(transactions == null)
+                return NoContent();
+
+            return Ok(_mapper.Map<IEnumerable<TransactionDto>>(transactions));
         }
 
         [HttpGet("{name}/bought")]
@@ -56,8 +61,10 @@ namespace ShoppingPlatform.API.Controllers
         {
             var transactions = await _transactionRepository.GetTransactionsByBuyerNameAsync(name);
 
-            var transactionsToReturn = _mapper.Map<IEnumerable<TransactionDto>>(transactions);
-            return Ok(transactionsToReturn);
+            if(transactions == null)
+                return NoContent();
+
+            return Ok(_mapper.Map<IEnumerable<TransactionDto>>(transactions));
         }
 
         [HttpGet("{name}/sold")]
@@ -65,9 +72,11 @@ namespace ShoppingPlatform.API.Controllers
         public async Task<ActionResult<IEnumerable<TransactionDto>>> GetTransactionsBoughtBy(string name)
         {
             var transactions = await _transactionRepository.GetTransactionsBySellerNameAsync(name);
+
+            if(transactions == null)
+                return NoContent();
             
-            var transactionsToReturn = _mapper.Map<IEnumerable<TransactionDto>>(transactions);
-            return Ok(transactionsToReturn);
+            return Ok(_mapper.Map<IEnumerable<TransactionDto>>(transactions));
         }
 
         [HttpGet("{name}/{id}")]
@@ -76,14 +85,19 @@ namespace ShoppingPlatform.API.Controllers
         {
             var transaction = await _transactionRepository.GetTransactionByIdAsync(id);
 
-            var transactionToReturn = _mapper.Map<TransactionDto>(transaction);
-            return Ok(transactionToReturn);
+            if(transaction == null)
+                return NoContent();
+
+            return Ok(_mapper.Map<TransactionDto>(transaction));
         }
 
         [HttpPost]
         public async Task<ActionResult> AddTransaction(TransactionForCreationDto transactionForCreation)
         {        
             var buyer = await _userRepository.GetUserByIdAsync(transactionForCreation.BuyerId);
+
+            if(buyer == null)
+                return BadRequest("Invalid buyer");
             
             var overallPrice = transactionForCreation.Products.Sum(p => p.Price);
             
@@ -113,9 +127,10 @@ namespace ShoppingPlatform.API.Controllers
                 var prod = await _productRepository.GetProductByIdAsync(item.Id);
                 //_productRepository.DeleteProduct(prod);
             }
-            
+            // _mapper.Map<TransactionDto>(transactionToPost)
             if (await _transactionRepository.SaveAllAsync())
-                return Ok();
+                return CreatedAtAction(nameof(GetTransactionsDetails), new {id = transactionToPost.Id}, transactionToPost);
+            
             throw new Exception("Failed while initializing transaction");
         }
         

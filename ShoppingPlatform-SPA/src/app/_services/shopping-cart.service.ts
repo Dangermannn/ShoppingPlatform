@@ -42,4 +42,8 @@ export class ShoppingCartService {
     localStorage.removeItem('shopping-cart');
     localStorage.setItem('shopping-cart', JSON.stringify(this.products));
   }
+
+  clearShoppingCart(){
+    localStorage.removeItem('shopping-cart');
+  }
 }
