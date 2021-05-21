@@ -11,6 +11,7 @@ import { RegistrationComponent } from './registration/registration.component';
 import { ShoppingCartComponent } from './shopping-cart/shopping-cart.component';
 import { TransactionsDetailsComponent } from './transactions-details/transactions-details.component';
 import { TransactionsComponent } from './transactions/transactions.component';
+import { AuthGuard } from './_guards/auth.guard';
 import { ProductDetailsArchResolver } from './_resolvers/product-details-arch.resolver';
 import { ProductDetailsResolver } from './_resolvers/product-details.resolver';
 import { ProductListByCategoryResolver } from './_resolvers/product-list-by-category.resolver';
@@ -22,16 +23,23 @@ import { UserEditResolver } from './_resolvers/user-edit.resolver';
 
 const routes: Routes = [
   {path: '', component: HomePageComponent, resolve: {products: ProductListByCategoryResolver} },
-  {path: 'users/shoppingCart', component: ShoppingCartComponent, resolve: {products: ShoppingCartResolver}},
-  {path: 'users/accountSettings/:name', component: AccountSettingsComponent, resolve: {user: UserEditResolver}},
-  {path: 'users/transactions/:name', component: TransactionsComponent, resolve: {transactions: TransactionListResolver}},
-  {path: 'users/transactions/:name/:id', component: TransactionsDetailsComponent, resolve: {transaction: TransactionDetailsResolver}},
+  {
+    path: '',
+    runGuardsAndResolvers: 'always',
+    canActivate: [AuthGuard],
+    children: [
+      {path: 'users/shoppingCart', component: ShoppingCartComponent, resolve: {products: ShoppingCartResolver}},
+      {path: 'users/accountSettings/:name', component: AccountSettingsComponent, resolve: {user: UserEditResolver}},
+      {path: 'users/transactions/:name', component: TransactionsComponent, resolve: {transactions: TransactionListResolver}},
+      {path: 'users/transactions/:name/:id', component: TransactionsDetailsComponent, resolve: {transaction: TransactionDetailsResolver}},
+      {path: 'products/create', component: ProductCreatorComponent}, 
+      {path: 'transactions', component: TransactionsComponent, resolve: {transactions: TransactionListResolver}},
+      {path: 'order-summary', component: OrderSummaryComponent, resolve: {products: ShoppingCartResolver}}
+    ]
+  },
   {path: 'register', component: RegistrationComponent},
-  {path: 'products/create', component: ProductCreatorComponent}, 
   {path: 'products/:id', component: ProductDetailsComponent, resolve: {product: ProductDetailsResolver}},
   {path: 'products/category/:category', component: HomePageComponent, resolve: {products: ProductListByCategoryResolver}},
-  {path: 'order-summary', component: OrderSummaryComponent, resolve: {products: ShoppingCartResolver}},
-  {path: 'transactions', component: TransactionsComponent, resolve: {transactions: TransactionListResolver}},
   {path: 'products/archive/:id', component: ProductDetailsArchComponent, resolve: {product: ProductDetailsArchResolver}},
   {path: '**', component: AppComponent, pathMatch: 'full'},
 ];

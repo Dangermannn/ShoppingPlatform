@@ -48,7 +48,7 @@ import { ProductDetailsArchResolver } from './_resolvers/product-details-arch.re
     ShoppingCartComponent,
     ProductCreatorComponent,
     OrderSummaryComponent,
-    ProductDetailsArchComponent
+    ProductDetailsArchComponent,
   ],
   imports: [
     BrowserModule,  
