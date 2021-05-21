@@ -16,5 +16,6 @@ namespace ShoppingPlatform.API.Entities
         public string FullAddress { get; set; }
         ICollection<Transaction> Sold { get; set; }
         ICollection<Transaction> Bought { get; set; }
+        public virtual ICollection<UserRole> Roles { get; set; }
     }
 }
