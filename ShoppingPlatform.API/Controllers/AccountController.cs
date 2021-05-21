@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
@@ -40,8 +41,18 @@ namespace ShoppingPlatform.API.Controllers
                 Created = DateTime.Now,
                 Description = userForRegisterDto.Description,
                 City = userForRegisterDto.City,
-                FullAddress = userForRegisterDto.City
+                FullAddress = userForRegisterDto.City,
+                Roles = new List<UserRole>()
             };
+
+
+            var role = await _context.Roles.SingleOrDefaultAsync(x => x.Name == "Basic");
+
+            user.Roles.Add(new UserRole()
+            {
+                User = user,
+                Role = role
+            });
 
             _context.Users.Add(user);
             await _context.SaveChangesAsync();
@@ -53,7 +64,7 @@ namespace ShoppingPlatform.API.Controllers
         [HttpPost("login")]
         public async Task<ActionResult<UserToReturnAfterLoginDto>> Login(UserForLoginDto userForLoginDto)
         {
-            var user = await _context.Users.SingleOrDefaultAsync(x => x.Username == userForLoginDto.Username);
+            var user = await _context.Users.Include(x => x.Roles).ThenInclude(x => x.Role).SingleOrDefaultAsync(x => x.Username == userForLoginDto.Username);
             if (user == null)
                 return Unauthorized("Invalid username");
 
