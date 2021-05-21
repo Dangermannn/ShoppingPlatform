@@ -31,8 +31,8 @@ namespace ShoppingPlatform.API.Controllers
             _productRepository = productsRepository;
         }
 
-        [HttpGet]
-        [Authorize]
+        [HttpGet("all-transactions")]
+        [Authorize(Policy = "RequireAdminRole")]
         public async Task<ActionResult<IEnumerable<TransactionDto>>> GetTransactions()
         {
             var transactions = await _transactionRepository.GetTransactionsAsync();
