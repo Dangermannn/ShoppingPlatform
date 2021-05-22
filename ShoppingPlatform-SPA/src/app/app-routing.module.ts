@@ -12,6 +12,7 @@ import { RegistrationComponent } from './registration/registration.component';
 import { ShoppingCartComponent } from './shopping-cart/shopping-cart.component';
 import { TransactionsDetailsComponent } from './transactions-details/transactions-details.component';
 import { TransactionsComponent } from './transactions/transactions.component';
+import { UserProductsComponent } from './user-products/user-products.component';
 import { AdminGuard } from './_guards/admin.guard';
 import { AuthGuard } from './_guards/auth.guard';
 import { ProductDetailsArchResolver } from './_resolvers/product-details-arch.resolver';
@@ -37,6 +38,7 @@ const routes: Routes = [
       {path: 'products/create', component: ProductCreatorComponent}, 
       {path: 'transactions', component: TransactionsComponent, resolve: {transactions: TransactionListResolver}},
       {path: 'order-summary', component: OrderSummaryComponent, resolve: {products: ShoppingCartResolver}},
+      {path: 'users/my-products/:name', component: UserProductsComponent},
       {path: 'admin-panel', component: AdminPanelComponent, resolve: {transactions: TransactionListResolver}, canActivate: [AdminGuard]}
     ]
   },

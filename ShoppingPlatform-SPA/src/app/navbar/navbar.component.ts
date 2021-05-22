@@ -38,12 +38,17 @@ export class NavbarComponent implements OnInit {
   }
 
   goToAccountSettings(){
-    var decodedToken = this.accountService.getDecodedToken(localStorage.getItem('user'));
+    let decodedToken = this.accountService.getDecodedToken(localStorage.getItem('user'));
     this.router.navigate(['/users/accountSettings/' + decodedToken.unique_name]);
   }
 
   goToTransactions(){
-    var decodedToken = this.accountService.getDecodedToken(localStorage.getItem('user'));
+    let decodedToken = this.accountService.getDecodedToken(localStorage.getItem('user'));
     this.router.navigate(['/users/transactions/' + decodedToken.unique_name]);
+  }
+
+  goToMyProducts(){
+    let decodedToken = this.accountService.getDecodedToken(localStorage.getItem('user'));
+    this.router.navigate(['/users/my-products/' + decodedToken.unique_name]);
   }
 }

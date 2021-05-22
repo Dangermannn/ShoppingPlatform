@@ -34,6 +34,7 @@
                     <form *ngIf="accountService.currentUser$ | async">
                         <button class="btn btn-primary dropdown-item mt-3 mx-auto" routerLink='/users/shoppingCart'><i class="fa fa-shopping-cart mr-2"></i>Shopping-cart</button>
                         <button class="btn btn-primary dropdown-item mt-3 mx-auto" (click)="goToTransactions()"><i class="fa fa-shopping-bag mr-2"></i>My orders</button>
+                        <button class="btn btn-primary dropdown-item mt-3 mx-auto" (click)="goToMyProducts()"><i class="fa fa-money mr-2" aria-hidden="true"></i>My products</button>
                         <button class="btn btn-primary dropdown-item mt-3 mx-auto" (click)="goToAccountSettings()"><i class="fa fa-cog mr-2"></i>Account settings</button>
                         <button *appHasRole='["Admin"]' class="btn btn-danger dropdown-item mt-3 mx-auto" routerLink='/admin-panel'><i class="fa fa-lock mr-2" aria-hidden="true"></i>Admin panel</button>
                         <button class="btn btn-primary dropdown-item mt-3 mx-auto" (click)="logout()">
