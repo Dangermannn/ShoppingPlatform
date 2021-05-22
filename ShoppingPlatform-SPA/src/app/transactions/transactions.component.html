@@ -2,6 +2,8 @@
 <div class="p-3 mt-5">
 
     <button class="btn btn-primary mb-5 mr-5 float-right" (click)="goToProductCreation()">List a product</button>
+    
+    <h1>My orders</h1>
     <table class="table table-striped">
         <thead class="thead-dark">
             <th scope="col">Id</th>
@@ -11,7 +13,28 @@
             <th scope="col">Details</th>
             <th scope="col">Remove</th>
         <tbody>
-            <tr *ngFor="let transaction of transactions">
+            <tr *ngFor="let transaction of myOrders">
+                <td>{{ transaction.id }}</td>
+                <td>{{ transaction.initialized | date: 'short' }}</td>
+                <td>{{ transaction.price }}</td>
+                <td>{{ transaction.products.length }}</td>
+                <td><a [routerLink]="['/users/transactions/' + currentUsername + '/' + transaction.id]" routerLinkActive="router-link-active">Details</a></td>
+                <td><Button class="btn btn-danger" (click)="updateTransaction(transaction)">Remove</Button></td>
+            </tr>
+        </tbody>
+    </table>
+
+    <h1>Ordered by others</h1>
+    <table class="table table-striped">
+        <thead class="thead-dark">
+            <th scope="col">Id</th>
+            <th scope="col">Initialized</th>
+            <th scope="col">Price</th>  
+            <th scope="col">Items count</th>
+            <th scope="col">Details</th>
+            <th scope="col">Remove</th>
+        <tbody>
+            <tr *ngFor="let transaction of orderedByOthers">
                 <td>{{ transaction.id }}</td>
                 <td>{{ transaction.initialized | date: 'short' }}</td>
                 <td>{{ transaction.price }}</td>

@@ -11,24 +11,40 @@ import { TransactionService } from '../_services/transaction.service';
   styleUrls: ['./transactions.component.css']
 })
 export class TransactionsComponent implements OnInit {
-  transactions: Transaction[];
+  myOrders: Transaction[];
+  orderedByOthers: Transaction[];
+
   currentUsername: string;
   constructor(private accountService: AccountService, private transactionService: TransactionService,
      private route: ActivatedRoute, private alertify: AlertifyService, private router: Router) { }
 
   ngOnInit(): void {
+    let transactions: Transaction[] = [];
     this.route.data.subscribe(data => {
-      this.transactions = data['transactions'];
+      transactions = data['transactions'];
     });
     var decodedToken = this.accountService.getDecodedToken(localStorage.getItem('user'));
-    this.currentUsername = decodedToken.nameid;
+    this.currentUsername = decodedToken.unique_name;
+
+    this.myOrders = transactions.filter((t) => {
+      return t.buyer.username === this.currentUsername;
+    });
+
+    this.orderedByOthers = transactions.filter((t) => {
+      return t.buyer.username !== this.currentUsername;
+    });
   }
 
   // It's for 'removing'. It makes transaction not visible for the user.
   updateTransaction(transaction: Transaction){
     this.transactionService.updateTransaction(transaction.id, this.currentUsername).subscribe(data => {
-      const index = this.transactions.indexOf(data, 0);
-      this.transactions.splice(index, 1);
+      let index = this.myOrders.indexOf(data, 0);
+      if(index === -1){
+        index = this.orderedByOthers.indexOf(data, 0);
+        this.orderedByOthers.splice(index, 1);
+      }else{
+        this.myOrders.splice(index, 1);
+      }
       this.alertify.success('Transaction has been removed successfully!');
     }, error => {
       this.alertify.error('Error while removing a transaction');
