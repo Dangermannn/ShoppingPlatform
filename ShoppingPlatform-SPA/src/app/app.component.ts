@@ -18,8 +18,6 @@ export class AppComponent implements OnInit {
   constructor(private http: HttpClient, private accountService: AccountService){}
 
   ngOnInit(): void {
-    console.log("URL: " + this.baseUrl);
-    //this.getUsers();
     this.setCurrentUser();
   }
 

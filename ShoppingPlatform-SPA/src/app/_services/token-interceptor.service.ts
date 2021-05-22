@@ -14,7 +14,6 @@ export class TokenInterceptorService implements HttpInterceptor {
         Authorization: 'Bearer ' + JSON.parse(localStorage.getItem('user'))?.token
       }
     });
-    console.log("Bearer " + JSON.parse(localStorage.getItem('user'))?.token);
     return next.handle(tokenizedRequest);
   }
 }

@@ -22,7 +22,6 @@ export class RegistrationComponent implements OnInit {
 
   registerUser(){
     this.userModel = Object.assign({}, this.registrationForm.value);
-    console.log(this.userModel);
     this.accountService.register(this.userModel).subscribe(() => {
       this.alertify.success("Account has been created");
       this.router.navigate(['']);

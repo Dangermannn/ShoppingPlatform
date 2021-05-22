@@ -19,9 +19,7 @@ export class ShoppingCartService {
   }
 
   removeProduct(index: number){
-    this.alertify.message("INDEX: " + index);
     this.products.splice(index, 1);
-    this.alertify.message("PRODUCTS SIZE IN SERVICE: " + this.products.length);
     this.updateShoppingCart();
     this.alertify.success('Product has ben removed from shopping-cart');
   }

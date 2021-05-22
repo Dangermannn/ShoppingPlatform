@@ -25,7 +25,5 @@ export class ShoppingCartComponent implements OnInit {
 
   removeItemFromShoppingCart(index: number){
     this.shoppingCartService.removeProduct(index);
-    //this.products.slice(index, 1);
-    this.alertify.error("REMOVED ITEMS: " + this.products.length + "INDEX: " + index);
   }
 }
