@@ -37,7 +37,7 @@ const routes: Routes = [
       {path: 'products/create', component: ProductCreatorComponent}, 
       {path: 'transactions', component: TransactionsComponent, resolve: {transactions: TransactionListResolver}},
       {path: 'order-summary', component: OrderSummaryComponent, resolve: {products: ShoppingCartResolver}},
-      {path: 'admin-panel', component: AdminPanelComponent, canActivate: [AdminGuard]}
+      {path: 'admin-panel', component: AdminPanelComponent, resolve: {transactions: TransactionListResolver}, canActivate: [AdminGuard]}
     ]
   },
   {path: 'register', component: RegistrationComponent},
