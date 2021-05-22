@@ -24,7 +24,7 @@ export class AccountSettingsComponent implements OnInit {
 
   updateUser(): void{
     var decodedToken = this.accountService.getDecodedToken(localStorage.getItem('user'));
-    this.userService.updateMember(this.user, decodedToken.nameid).subscribe(data => {
+    this.userService.updateMember(this.user, decodedToken.unique_name).subscribe(data => {
       this.alertify.success('Profile has been updated!');
     }, error => {
       this.alertify.error('Error occured while removing a transaction!');
