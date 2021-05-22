@@ -33,6 +33,7 @@ import { ProductDetailsArchComponent } from './mainPage/product-details-arch/pro
 import { ProductDetailsArchResolver } from './_resolvers/product-details-arch.resolver';
 import { AdminPanelComponent } from './admin/admin-panel/admin-panel.component';
 import { HasRoleDirective } from './_directives/has-role.directive';
+import { UserProductsComponent } from './user-products/user-products.component';
 
 @NgModule({   
   declarations: [
@@ -53,6 +54,7 @@ import { HasRoleDirective } from './_directives/has-role.directive';
     ProductDetailsArchComponent,
     AdminPanelComponent,
     HasRoleDirective,
+    UserProductsComponent,
   ],
   imports: [
     BrowserModule,  
