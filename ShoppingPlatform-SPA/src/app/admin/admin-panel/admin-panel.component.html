@@ -1,1 +1,6 @@
-<p>admin-panel works!</p>
+
+<h1>Admin panel</h1>
+<div *ngFor="let transaction of transactions">
+    <p>{{transaction.initialized}}</p>
+    <p>{{transaction.price}}</p>
+</div>
