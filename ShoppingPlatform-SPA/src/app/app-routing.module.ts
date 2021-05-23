@@ -38,7 +38,6 @@ const routes: Routes = [
       {path: 'users/transactions/:name', component: TransactionsComponent, resolve: {transactions: TransactionListResolver}},
       {path: 'users/transactions/:name/:id', component: TransactionsDetailsComponent, resolve: {transaction: TransactionDetailsResolver}},
       {path: 'products/create', component: ProductCreatorComponent}, 
-      {path: 'transactions', component: TransactionsComponent, resolve: {transactions: TransactionListResolver}},
       {path: 'order-summary', component: OrderSummaryComponent, resolve: {products: ShoppingCartResolver}},
       {path: 'users/my-products/:name', component: UserProductsComponent, resolve: {myProducts: UserProductsResolver, mySoldProducts: UserArchiveProductsResolver}},
       {path: 'admin-panel', component: AdminPanelComponent, resolve: {transactions: TransactionListResolver}, canActivate: [AdminGuard]}
