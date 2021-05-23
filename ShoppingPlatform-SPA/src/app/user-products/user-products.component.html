@@ -15,7 +15,7 @@
                 <td>{{ product.title }}</td>
                 <td>{{ product.price }}</td>
                 <td><a [routerLink]="['/products/' + product.id]" routerLinkActive="router-link-active">Details</a></td>
-                <td><Button class="btn btn-danger">Remove</Button></td>
+                <td><Button class="btn btn-danger" (click)="removeProduct(product)">Remove</Button></td>
             </tr>
         </tbody>
     </table>
