@@ -1,1 +1,39 @@
-<p>user-products works!</p>
+<div class="p-3 mt-5">
+
+    
+    <h1>My products</h1>
+    <table class="table table-striped">
+        <thead class="thead-dark">
+            <th scope="col">Id</th>
+            <th scope="col">Title</th>
+            <th scope="col">Price</th>  
+            <th scope="col">Details</th>
+            <th scope="col">Remove</th>
+        <tbody>
+            <tr *ngFor="let product of myProducts">
+                <td>{{ product.id }}</td>
+                <td>{{ product.title }}</td>
+                <td>{{ product.price }}</td>
+                <td><a [routerLink]="['/products/' + product.id]" routerLinkActive="router-link-active">Details</a></td>
+                <td><Button class="btn btn-danger">Remove</Button></td>
+            </tr>
+        </tbody>
+    </table>
+
+    <h1>Sold</h1>
+    <table class="table table-striped">
+        <thead class="thead-dark">
+            <th scope="col">Id</th>
+            <th scope="col">Title</th>
+            <th scope="col">Price</th>  
+            <th scope="col">Details</th>>
+        <tbody>
+            <tr *ngFor="let product of mySoldProducts">
+                <td>{{ product.id }}</td>
+                <td>{{ product.title }}</td>
+                <td>{{ product.price }}</td>
+                <td><a [routerLink]="['/products/archive/' + product.id]" routerLinkActive="router-link-active">Details</a></td>
+            </tr>
+        </tbody>
+    </table>
+</div>

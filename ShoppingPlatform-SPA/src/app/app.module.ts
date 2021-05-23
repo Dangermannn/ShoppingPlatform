@@ -34,6 +34,8 @@ import { ProductDetailsArchResolver } from './_resolvers/product-details-arch.re
 import { AdminPanelComponent } from './admin/admin-panel/admin-panel.component';
 import { HasRoleDirective } from './_directives/has-role.directive';
 import { UserProductsComponent } from './user-products/user-products.component';
+import { UserProductsResolver } from './_resolvers/user-products.resolver';
+import { UserArchiveProductsResolver } from './_resolvers/user-archive-products.resolver';
 
 @NgModule({   
   declarations: [
@@ -75,6 +77,8 @@ import { UserProductsComponent } from './user-products/user-products.component';
     TransactionListResolver,
     TransactionDetailsResolver,
     ShoppingCartResolver,
+    UserProductsResolver,
+    UserArchiveProductsResolver,
     ProductDetailsArchResolver,
     {
       provide: HTTP_INTERCEPTORS,

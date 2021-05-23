@@ -24,6 +24,10 @@ export class ProductService {
     return this.http.get<Product>(this.baseUrl + 'products/' + id);
   }
 
+  getUserProducts(username: string){
+    return this.http.get<Product[]>(this.baseUrl + 'products/my-products/' + username);
+  }
+
   getCategories(){
     return this.http.get<Category[]>(this.baseUrl + 'products/categories');
   }
@@ -47,4 +51,9 @@ export class ProductService {
   getArchivedProducts(){
     return this.http.get<Product[]>(this.baseUrl + 'products/archive');
   }
+
+  getUserArchivedProducts(username: string){
+    return this.http.get<Product[]>(this.baseUrl + 'products/archive/my-products/' + username);
+  }
+
 }

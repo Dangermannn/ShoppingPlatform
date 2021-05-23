@@ -21,7 +21,9 @@ import { ProductListByCategoryResolver } from './_resolvers/product-list-by-cate
 import { ShoppingCartResolver } from './_resolvers/shopping-cart.resolver';
 import { TransactionDetailsResolver } from './_resolvers/transaction-details.resolver';
 import { TransactionListResolver } from './_resolvers/transaction-list.resolver';
+import { UserArchiveProductsResolver } from './_resolvers/user-archive-products.resolver';
 import { UserEditResolver } from './_resolvers/user-edit.resolver';
+import { UserProductsResolver } from './_resolvers/user-products.resolver';
 
 
 const routes: Routes = [
@@ -38,7 +40,7 @@ const routes: Routes = [
       {path: 'products/create', component: ProductCreatorComponent}, 
       {path: 'transactions', component: TransactionsComponent, resolve: {transactions: TransactionListResolver}},
       {path: 'order-summary', component: OrderSummaryComponent, resolve: {products: ShoppingCartResolver}},
-      {path: 'users/my-products/:name', component: UserProductsComponent},
+      {path: 'users/my-products/:name', component: UserProductsComponent, resolve: {myProducts: UserProductsResolver, mySoldProducts: UserArchiveProductsResolver}},
       {path: 'admin-panel', component: AdminPanelComponent, resolve: {transactions: TransactionListResolver}, canActivate: [AdminGuard]}
     ]
   },
