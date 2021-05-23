@@ -81,7 +81,7 @@ namespace ShoppingPlatform.API.Controllers
 
         [HttpGet("{name}/{id}")]
         [Authorize]
-        public async Task<ActionResult<IEnumerable<TransactionDto>>> GetTransactionsDetails(int id)
+        public async Task<ActionResult<TransactionDto>> GetTransactionsDetails(string name, int id)
         {
             var transaction = await _transactionRepository.GetTransactionByIdAsync(id);
 
@@ -127,10 +127,8 @@ namespace ShoppingPlatform.API.Controllers
                 var prod = await _productRepository.GetProductByIdAsync(item.Id);
                 //_productRepository.DeleteProduct(prod);
             }
-            // _mapper.Map<TransactionDto>(transactionToPost)
             if (await _transactionRepository.SaveAllAsync())
-                return CreatedAtAction(nameof(GetTransactionsDetails), new {id = transactionToPost.Id}, transactionToPost);
-            
+                return CreatedAtAction(nameof(GetTransactionsDetails), new {name = buyer.Username,id = transactionToPost.Id}, _mapper.Map<TransactionDto>(transactionToPost));
             throw new Exception("Failed while initializing transaction");
         }
         
