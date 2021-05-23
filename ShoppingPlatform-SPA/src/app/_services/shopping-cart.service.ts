@@ -14,6 +14,8 @@ export class ShoppingCartService {
 
   addProduct(product: Product){
     this.products = JSON.parse(localStorage.getItem('shopping-cart'));
+    if(this.products == null)
+      this.products = [];
     this.products.push(product);
     this.updateShoppingCart();
   }
