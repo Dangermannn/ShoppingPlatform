@@ -33,6 +33,20 @@ namespace ShoppingPlatform.API.Data
             return await _context.ArchivedProduct.Include(p => p.Category).Include(p => p.Seller).ToListAsync();
         }
 
+        public async Task<IEnumerable<ArchivedProduct>> GetUserArchivedProductsAsync(string username)
+        {
+            return await _context.ArchivedProduct.Include(p => p.Category).Include(p => p.Seller)
+                .Where(p => p.Seller.Username == username)
+                .ToListAsync();
+        }
+
+        public async Task<IEnumerable<Product>> GetUserProductsAsync(string username)
+        {
+            return await _context.Products.Include(p => p.Category).Include(p => p.Seller)
+                .Where(p => p.Seller.Username == username)
+                .ToListAsync();
+        }
+
         public async Task<Product> GetProductByIdAsync(int id)
         {
             return await _context.Products.Include(p => p.Category).Include(p => p.Seller).FirstOrDefaultAsync(p => p.Id == id);

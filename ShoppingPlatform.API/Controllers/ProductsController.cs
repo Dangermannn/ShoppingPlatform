@@ -47,6 +47,17 @@ namespace ShoppingPlatform.API.Controllers
             return Ok( _mapper.Map<ProductToReturnDto>(product));
         }
 
+        [HttpGet("archive/my-products/{username}")]
+        public async Task<ActionResult<IEnumerable<ProductToReturnDto>>> GetUserArchivedProducts(string username)
+        {
+            var products = await _productsRepository.GetUserArchivedProductsAsync(username);
+
+            if(products == null)
+                return NoContent();
+
+            return Ok(_mapper.Map<IEnumerable<ProductToReturnDto>>(products));
+        }
+
         [HttpGet]
         public async Task<ActionResult<IEnumerable<ProductToReturnDto>>> GetProducts()
         {
@@ -55,6 +66,17 @@ namespace ShoppingPlatform.API.Controllers
             if(products == null)
                 return NoContent();
 
+            return Ok(_mapper.Map<IEnumerable<ProductToReturnDto>>(products));
+        }
+
+        [HttpGet("my-products/{username}")]
+        public async Task<ActionResult<IEnumerable<ProductToReturnDto>>> GetUserProducts(string username)
+        {
+            var products = await _productsRepository.GetUserProductsAsync(username);
+            
+            if(products == null)
+                return NoContent();
+            
             return Ok(_mapper.Map<IEnumerable<ProductToReturnDto>>(products));
         }
 

@@ -8,6 +8,8 @@ namespace ShoppingPlatform.API.Interfaces
     {
         Task<ArchivedProduct> GetArchivedProductByIdAsync(int id);
         Task<IEnumerable<ArchivedProduct>> GetArchivedProductsAsync();
+        Task<IEnumerable<ArchivedProduct>> GetUserArchivedProductsAsync(string username);
+        Task<IEnumerable<Product>> GetUserProductsAsync(string username);
         Task<Product> GetProductByIdAsync(int id);
         Task<IEnumerable<Product>> GetProductsAsync();
         Task<IEnumerable<Product>> GetProductsByCategoryAsync(string category);
