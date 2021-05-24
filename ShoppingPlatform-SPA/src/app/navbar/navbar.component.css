@@ -3,20 +3,27 @@
   cursor: pointer;
 }
 
+@media only screen and (min-width: 1200px){
+    .search-key
+    {
+        min-width: 400px;   
+    }
+    .navbar-center
+    {
+        display:flex;
+        justify-content:center;
+        width: 100%;
+    }
 
-.search-key
-{
-    min-width: 400px;    
-}
-.navbar-center
-{
-    display:flex;
-    justify-content:center;
-    width: 100%;
+    .dropdown-menu{
+        right: 0;
+        left: auto;
+        width: 300px !important;
+    }
 }
 
-.dropdown-menu{
-    right: 0;
-    left: auto;
-    width: 300px !important;
+@media only screen and (max-width: 1200px){
+    .dropdown{
+        float: right;
+    }
 }

@@ -7,7 +7,6 @@ import { ProductService } from 'src/app/_services/product.service';
 
 @Component({
   selector: 'app-categories',
-  //templateUrl: './categories.component.html',
   template: `<div id='treeparent'><ejs-treeview id='treeelement' #treevalidate (nodeClicked)='nodeCheck($event)' [fields]='field'></ejs-treeview></div>`,
   styleUrls: ['./categories.component.css']
 })

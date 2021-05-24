@@ -1,8 +1,8 @@
-<div class="card text-center" style="width: 18rem;">
-    <img class="card-img-top" src="{{'../../../../../assets/default_card_image.png' }}" alt="{{ '../../../../../assets/default_card_image.png' }}">
+<div class="card text-center m-2" style="">
+    <img class="card-img-top img-fluid" src="{{'../../../../../assets/default_card_image.png' }}" alt="{{ '../../../../../assets/default_card_image.png' }}">
     <div class="card-body">
       <h5 class="card-title">{{ product.title }}</h5>
-      <p class="card-text">{{ product.description }}</p>
+      <p class="card-text">{{ product.description | slice:0:10 }}</p>
       <a href="#" class="btn btn-primary" [routerLink]="['/products/', product.id]">Show more details</a>
     </div>
   </div>  

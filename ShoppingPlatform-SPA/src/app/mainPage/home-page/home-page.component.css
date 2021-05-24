@@ -1,0 +1,10 @@
+@media only screen and (max-width: 1420px) and (min-width: 1301px){
+    #categories{
+        min-width: 15%;
+    }
+}
+@media only screen and (max-width: 1300px) and (min-width: 990px){
+    #categories{
+        min-width: 30%;
+    }
+}

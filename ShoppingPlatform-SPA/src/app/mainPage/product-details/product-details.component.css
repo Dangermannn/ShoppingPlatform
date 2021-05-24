@@ -8,3 +8,13 @@
     margin: 25px;
     padding: 20px;
 }
+
+@media only screen and (max-width: 1300px){
+    *{
+        margin: 0;
+    }
+
+    .row{
+        margin: 0 !important;
+    }
+}

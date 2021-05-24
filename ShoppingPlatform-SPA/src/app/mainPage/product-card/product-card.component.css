@@ -3,3 +3,8 @@ p, h5 {
     overflow: hidden;
     text-overflow: ellipsis;
 }
+
+.card-img-top{
+    width:100%;
+    height:auto;
+  }
