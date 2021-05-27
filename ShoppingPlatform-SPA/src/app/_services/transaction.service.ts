@@ -12,8 +12,8 @@ export class TransactionService {
 
   constructor(private http: HttpClient) { }
 
-  getTransactions(){
-    return this.http.get<Transaction[]>(this.baseUrl + 'transactions');
+  getAllTransactions(){
+    return this.http.get<Transaction[]>(this.baseUrl + 'transactions/all-transactions');
   }
 
   getTransactionsOfUser(name: string){

@@ -15,6 +15,7 @@ import { TransactionsComponent } from './transactions/transactions.component';
 import { UserProductsComponent } from './user-products/user-products.component';
 import { AdminGuard } from './_guards/admin.guard';
 import { AuthGuard } from './_guards/auth.guard';
+import { AllTransactionsResolver } from './_resolvers/all-transactions.resolver';
 import { ProductDetailsArchResolver } from './_resolvers/product-details-arch.resolver';
 import { ProductDetailsResolver } from './_resolvers/product-details.resolver';
 import { ProductListByCategoryResolver } from './_resolvers/product-list-by-category.resolver';
@@ -40,7 +41,7 @@ const routes: Routes = [
       {path: 'products/create', component: ProductCreatorComponent}, 
       {path: 'order-summary', component: OrderSummaryComponent, resolve: {products: ShoppingCartResolver}},
       {path: 'users/my-products/:name', component: UserProductsComponent, resolve: {myProducts: UserProductsResolver, mySoldProducts: UserArchiveProductsResolver}},
-      {path: 'admin-panel', component: AdminPanelComponent, resolve: {transactions: TransactionListResolver}, canActivate: [AdminGuard]}
+      {path: 'admin-panel', component: AdminPanelComponent, resolve: {transactions: AllTransactionsResolver}, canActivate: [AdminGuard]}
     ]
   },
   {path: 'register', component: RegistrationComponent},

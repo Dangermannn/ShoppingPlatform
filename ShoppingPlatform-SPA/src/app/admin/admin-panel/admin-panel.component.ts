@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Transaction } from 'src/app/_models/transaction';
-import { TransactionService } from 'src/app/_services/transaction.service';
 
 @Component({
   selector: 'app-admin-panel',
